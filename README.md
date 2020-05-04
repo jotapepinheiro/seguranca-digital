@@ -43,11 +43,16 @@
 # Recriar os dados de nosso banco de dados
 > php artisan migrate:fresh --seed
 ```
+
+---
+## Diagrama UML
+![Diagrama}](doc/img/diagrama.png)
+
 ---
 ## Importar Endpoits da API para o Insomia
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Squadra%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fjotapepinheiro%2Fseguranca-digital%2Fmaster%2Fdoc%2Farquivos%2FInsomnia_export.json)
 
-![](doc/img/insomia.gif)
+![Insomia](doc/img/insomia.gif)
 
 ---
 ## Como executar o projeto?
