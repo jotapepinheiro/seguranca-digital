@@ -29,9 +29,9 @@ class RolesTableSeeder extends Seeder
         ))->perms()->sync([1,5,9,13,14,15,16]);
 
         Role::create(array(
-            'name' => 'usuario',
-            'display_name' => 'Usuário',
-            'description' => 'Usuário Comum'
+            'name' => 'tecnico',
+            'display_name' => 'Técnico',
+            'description' => 'Usuário Técnico'
         ))->perms()->sync([13,14]);
     }
 }

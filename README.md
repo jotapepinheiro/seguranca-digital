@@ -47,13 +47,15 @@
 ## Importar Endpoits da API para o Insomia
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Squadra%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fjotapepinheiro%2Fseguranca-digital%2Fmaster%2Fdoc%2Farquivos%2FInsomnia_export.json)
 
+![](doc/img/insomia.gif)
+
 ---
 ## Como executar o projeto?
 ```shell script
 # Você pode executá-lo no host local ou pode ter a configuração do host virtual
 # O servidor fica a sua escolha entre nginx ou apache
 # Particularmente prefiro nginx com host de domínio local. 
-# Exemplo: http://meuprojeto.test
+# Exemplo: http://segurancadigital.test
 # Nota: Informe a URL no projeto importado do Insomia para testar os endpoits. 
 > php artisan serve
 ```
@@ -66,54 +68,97 @@
 
 ## Consultar sistemas cadastrados
 ```
-# Importante: O final da url deve conter os parametros api/v1. Exemplo: http://meuprojeto.test/api/v1
+# Importante: O final da url deve conter os parâmetros api/v1. 
+# Exemplo: http://segurancadigital.test/api/v1
 
 # Exibir todos.
-> http://segurancadigital.test/api/v1/sistemas
+> /api/v1/sistemas
 
 # Exibir todos, com a última justicativa.
-> http://segurancadigital.test/api/v1/sistemas?include=controle
+> /api/v1/sistemas?include=controle
 
 # Exibir todos, com a última justicativa e usuário técnico.
-> http://segurancadigital.test/api/v1/sistemas?include=controle,controle.user
+> /api/v1/sistemas?include=controle,controle.user
 
 # Exibir todos, com todas as justicativas.
-> http://segurancadigital.test/api/v1/sistemas?include=controles
+> /api/v1/sistemas?include=controles
 
 # Exibir todos, com todas as justicativas e usuários técnicos.
-> http://segurancadigital.test/api/v1/sistemas?include=controles,controles.user
+> /api/v1/sistemas?include=controles,controles.user
 
 # Filtrar por descrição, com a última justicativa e usuário técnico
-> http://segurancadigital.test/api/v1/sistemas?include=controle,controle.user&filter=[descricao]=Rodrigues
+> /api/v1/sistemas?include=controle,controle.user&filter=[descricao]=Rodrigues
 
 # Filtrar por descrição e sigla, com a última justicativa
-> http://segurancadigital.test/api/v1/sistemas?include=controle&filter[descricao]=Rodrigues&filter[sigla]=QUIDEM
+> /api/v1/sistemas?include=controle&filter[descricao]=Rodrigues&filter[sigla]=QUIDEM
 
 # Filtrar por e-mail de usuário técnico
-> http://segurancadigital.test/api/v1/sistemas?filter[email]=pedro0example.org
+> /api/v1/sistemas?filter[email]=pedro0example.org
 
 # Filtrar por status
-> http://segurancadigital.test/api/v1/sistemas?filter[status]=cancelado
+> /api/v1/sistemas?filter[status]=cancelado
 
 # Filtrar por nome do usuário todos os sistemas onde ele fez a qualquer alteração
-> http://segurancadigital.test/api/v1/sistemas?include=controles&filter[controles.user.name]=Pedro
+> /api/v1/sistemas?include=controles&filter[controles.user.name]=Pedro
 
 # Filtrar por e-mail do usuário todos os sistemas onde ele fez a qualquer alteração
-> http://segurancadigital.test/api/v1/sistemas?include=controles&filter[controle.user.email]=pedro0example.org
+> /api/v1/sistemas?include=controles&filter[controle.user.email]=pedro0example.org
 
 # Filtrar por nome do usuário que criou o sistema
-> http://segurancadigital.test/api/v1/sistemas?include=createdBy&filter[createdBy.name]=Pedro
+> /api/v1/sistemas?include=createdBy&filter[createdBy.name]=Pedro
 
 # Filtrar por nome do usuário que alterou o sistema
-> http://segurancadigital.test/api/v1/sistemas?include=updatedBy&filter[updatedBy.name]=Pedro
+> /api/v1/sistemas?include=updatedBy&filter[updatedBy.name]=Pedro
 ```
 
 ## Listar sistema por ID
 ```
-> http://segurancadigital.test/api/v1/sistemas/20
+> /api/v1/sistemas/20
 ```
 
 ## Listar histórico de lterações de um sistema por ID
 ```
-> http://segurancadigital.test/api/v1/sistemas/historico/18
+> /api/v1/sistemas/historico/18
 ```
+
+## Usuários do sistema
+```
+# Listar todos usuários cadastrados
+> /api/v1/users
+
+# Exibir dados do usuário, perfis e permissões por ID
+> /api/v1/users/2
+
+1. Perfil - Super Administrador
+> Login: super@super.com 
+> Senha: super
+
+2. Perfil - Administrador
+> Login: admin@admin.com
+> Senha: admin
+
+3. Perfil - Técnico
+> Login: tecnico@tecnico.com
+> Senha: tecnico
+
+4. 50 usuários ficticios com o perfil técnico 
+> Senha Padrão: 123456
+
+```
+
+## Login
+```
+> /api/v1/auth/login
+```
+Se o parâmetro "remember" for enviado como "true", o tempo token JWT irá durar por 1 semana, caso contrário 1 hora.
+Este tempo pode se definido no arquivo .env
+JWT_TTL e JWT_TTL_REMEMBER_ME
+```json
+{
+	"email": "super@super.com",
+	"password": "super",
+	"remember": true
+}
+
+```
+
