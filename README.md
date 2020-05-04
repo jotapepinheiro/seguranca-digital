@@ -14,7 +14,7 @@
 
 --- 
 ## O que é necessário para configurar?
-1. PHP >= 7.1 com requisitos de extensão, conforme descrito na documentação do [Lumen](https://lumen.laravel.com/docs/6.x#server-requirements).
+1. PHP >= 7.2 com requisitos de extensão, conforme descrito na documentação do [Lumen](https://lumen.laravel.com/docs/6.x#server-requirements).
 3. [Composer](https://getcomposer.org/) em uma Versão estável.
 4. Qualquer banco de dados de sua escolha, eu usei o MySQL.
 
