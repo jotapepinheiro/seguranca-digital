@@ -52,9 +52,9 @@
 ---
 ## Como executar o projeto?
 ```shell script
-# Você pode executá-lo no host local ou pode ter a configuração do host virtual
+# Você pode executá-lo no localhost ou pode configurar do virtualhost local
 # O servidor fica a sua escolha entre nginx ou apache
-# Particularmente prefiro nginx com host de domínio local. 
+# Particularmente prefiro nginx com virtualhost de domínio local. 
 # Exemplo: http://segurancadigital.test
 # Nota: Informe a URL no projeto importado do Insomia para testar os endpoits. 
 > php artisan serve
