@@ -25,7 +25,7 @@
 > composer install
 
 # Criar o arquivo .env e defina o seu APP_TIMEZONE e banco de dados.
-> cp -fR .env.example .env
+> cp .env.example .env
 
 # Gerar app secret
 > php artisan key:generate
