@@ -24,7 +24,7 @@
 # Instalar todos os pacotes necessários para executar o aplicativo
 > composer install;
 
-# Criar seu arquivo .env
+# Criar o arquivo .env e defina o seu APP_TIMEZONE e banco de dados.
 > cp -fR .env.example .env;
 
 # Gerar app secret
@@ -45,7 +45,7 @@
 ```
 ---
 ## Importar Endpoits da API para o Insomia
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Squadra-API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fjotapepinheiro%2Fseguranca-digital%2Fmaster%2Fdoc%2Farquivos%2FInsomnia_export.json) 
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Squadra%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fjotapepinheiro%2Fseguranca-digital%2Fmaster%2Fdoc%2Farquivos%2FInsomnia_export.json)
 
 ---
 ## Como executar o projeto?
@@ -108,39 +108,12 @@
 > http://segurancadigital.test/api/v1/sistemas?include=updatedBy&filter[updatedBy.name]=Pedro
 ```
 
-## Listar sistema por ID do sistema
+## Listar sistema por ID
 ```
 > http://segurancadigital.test/api/v1/sistemas/20
 ```
 
-## Listar histórico de lterações de um sistema por ID do sistema
+## Listar histórico de lterações de um sistema por ID
 ```
 > http://segurancadigital.test/api/v1/sistemas/historico/18
-```
-
-
-## Migratios e Seeders
-```shell script
-php artisan make:migration create_users_table --create=users
-php artisan make:seeder UsersTableSeeder
-php artisan make:model User
-
-php artisan make:migration create_sistemas_table --create=sistemas
-php artisan make:seeder SistemasTableSeeder
-php artisan make:model Sistema
-
-php artisan make:migration create_controles_table --create=controles
-php artisan make:seeder ControlesTableSeeder
-php artisan make:model Controle
-
-
-php artisan make:model Role
-php artisan make:model Permission 
-
-php artisan migrate
-php artisan db:seed
-
-php artisan migrate:fresh --seed
-
-composer dump-autoload
 ```
