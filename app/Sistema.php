@@ -20,12 +20,12 @@ class Sistema extends Model
         'descricao', 'sigla', 'email', 'url', 'status'
     ];
 
-    public function created_by()
+    public function createdBy()
     {
         return $this->hasOne(User::class, 'id', 'created_by');
     }
 
-    public function updated_by()
+    public function updatedBy()
     {
         return $this->hasOne(User::class, 'id', 'updated_by');
     }

@@ -41,9 +41,14 @@ class SistemaController extends Controller
             ->allowedFilters([
                 'descricao', 'sigla', 'email', 'status',
                 'controles.user.name', 'controle.user.name',
-                'controles.user.email', 'controle.user.email'
+                'controles.user.email', 'controle.user.email',
+                'createdBy.name', 'updatedBy.name'
             ])
-            ->allowedIncludes(['controle', 'controle.user', 'controles', 'controles.user'])
+            ->allowedIncludes([
+                'controle', 'controle.user',
+                'controles', 'controles.user',
+                'createdBy.name', 'updatedBy.name'
+            ])
             ->defaultSort('-id')
             ->allowedSorts('descricao', 'sigla', 'email', 'url', 'status')
             ->paginate(50)
@@ -61,8 +66,8 @@ class SistemaController extends Controller
     public function historico($id)
     {
         $sistema = $this->sistema
-            ->with('created_by')
-            ->with('updated_by')
+            ->with('createdBy')
+            ->with('updatedBy')
             ->with('controles')
             ->with('controles.user')
             ->findOrFail($id);
@@ -79,8 +84,8 @@ class SistemaController extends Controller
     public function show($id)
     {
         $sistema = $this->sistema
-            ->with('created_by')
-            ->with('updated_by')
+            ->with('createdBy')
+            ->with('updatedBy')
             ->with('controle')
             ->with('controle.user')
             ->findOrFail($id);
