@@ -52,7 +52,7 @@
 ---
 ## Como executar o projeto?
 ```shell script
-# Você pode executá-lo no localhost ou pode configurar do virtualhost local
+# Você pode executá-lo no localhost ou pode configurar um virtualhost local
 # O servidor fica a sua escolha entre nginx ou apache
 # Particularmente prefiro nginx com virtualhost de domínio local. 
 # Exemplo: http://segurancadigital.test
