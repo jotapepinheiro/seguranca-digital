@@ -46,7 +46,7 @@
 
 ---
 ## Diagrama UML
-![Diagrama}](doc/img/diagrama.png)
+![Diagrama}](doc/img/diagrama.svg)
 
 ---
 ## Importar Endpoits da API para o Insomia
