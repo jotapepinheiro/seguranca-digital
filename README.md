@@ -150,7 +150,7 @@
 ```
 > /api/v1/auth/login
 ```
-Se o parâmetro "remember" for enviado como "true", o tempo token JWT irá durar por 1 semana, caso contrário 1 hora.
+Se o parâmetro "remember" for enviado como "true", o token JWT irá expirar em 1 semana, caso contrário 1 hora.
 Este tempo pode se definido no arquivo .env
 JWT_TTL e JWT_TTL_REMEMBER_ME
 ```json
