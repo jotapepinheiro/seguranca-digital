@@ -10,12 +10,12 @@
 ## Qual o objetivo deste repositório?
 1. Processo seletivo para a empresa [SQUADRA Tecnologia](https://www.squadra.com.br).
 2. Criar um cadastro de "sistemas" e controle de justificativa de alterações.
-3. Executar consultar avançadas em uma query.
+3. Executar consultas avançadas em uma query.
 
 --- 
 ## O que é necessário para configurar?
-1. PHP >= 7.1 com requisitos de extensão, conforme descrito na documentação do Laravel.
-3. Composer em uma Versão estável.
+1. PHP >= 7.1 com requisitos de extensão, conforme descrito na documentação do [Lumen](https://lumen.laravel.com/docs/6.x#server-requirements).
+3. [Composer](https://getcomposer.org/) em uma Versão estável.
 4. Qualquer banco de dados de sua escolha, eu usei o MySQL.
 
 ---
