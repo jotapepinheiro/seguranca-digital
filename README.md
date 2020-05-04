@@ -22,20 +22,20 @@
 ## Como instalar?
 ```shell script
 # Instalar todos os pacotes necessários para executar o aplicativo
-> composer install;
+> composer install
 
 # Criar o arquivo .env e defina o seu APP_TIMEZONE e banco de dados.
-> cp -fR .env.example .env;
+> cp -fR .env.example .env
 
 # Gerar app secret
-> php artisan key:generate;
+> php artisan key:generate
 
 # Gerar jwt secret
-> php artisan jwt:secret;
+> php artisan jwt:secret
 
 # Criar as tabelas necessárias no seu banco de dados
 # Nota: Lembre-se de criar o banco de dados antes de executar este comando!
-> php artisan migrate;
+> php artisan migrate
 
 # Alimentar nosso banco de dados com dados necessários
 > php artisan db:seed
