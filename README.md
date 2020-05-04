@@ -116,7 +116,7 @@
 > /api/v1/sistemas/20
 ```
 
-## Listar histórico de lterações de um sistema por ID
+## Listar histórico de alterações de um sistema por ID
 ```
 > /api/v1/sistemas/historico/18
 ```
