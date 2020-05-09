@@ -57,7 +57,7 @@
 ![Insomia](doc/img/insomia.png)
 
 ---
-## Gerar Documentação do Swagger
+## Gerar/Acessar a documentação do Swagger
 ```shell script
 # Nota: O comando abaixo irá gerar a documentação da API conforme as anotações no código PHP. 
 > php artisan swagger-lume:generate
