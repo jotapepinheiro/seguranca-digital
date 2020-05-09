@@ -39,7 +39,7 @@ class Authenticate
             return response()
                 ->json([
                     'success' => false,
-                    'status' => 401,
+                    'code' => 401,
                     'message' => 'Não autorizado!!'
                 ], 401);
         }

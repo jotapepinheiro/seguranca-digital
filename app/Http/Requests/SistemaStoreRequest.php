@@ -62,6 +62,7 @@ class SistemaStoreRequest extends FormRequest
         throw new HttpResponseException(response()->json(
             [
                 "success" => false,
+                "code" => 422,
                 "error" => $validator->errors(),
                 "message" => "Um ou mais campos são requiridos."
             ], 422));

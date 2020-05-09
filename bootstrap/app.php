@@ -64,6 +64,8 @@ $app->configure('app');
 
 $app->configure('permission');
 
+$app->configure('swagger-lume');
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -106,6 +108,7 @@ $app->configure('permission');
  $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
  $app->register(Zizaco\Entrust\EntrustServiceProvider::class);
  $app->register(Spatie\QueryBuilder\QueryBuilderServiceProvider::class);
+ $app->register(\SwaggerLume\ServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

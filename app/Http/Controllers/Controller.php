@@ -20,12 +20,11 @@ class Controller extends BaseController
     {
         $ttl = (int) Auth::factory()->getTTL();
 
-        return response()->json([
-            'success'=> true,
+        return response()->json(['success' => true, 'code' => 200, 'data' => [
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in_minutes' => $ttl,
             'expires_in_date' => Carbon::now()->addMinute($ttl)->format('d-m-Y H:i:s'),
-        ], 200);
+        ]], 200);
     }
 }

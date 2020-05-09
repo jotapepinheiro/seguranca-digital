@@ -6,7 +6,7 @@ use Urameshibr\Requests\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UserRegisterRequest extends FormRequest
+class RoleStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,10 @@ class UserRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email:filter|max:255|unique:users',
-            'password' => 'required|confirmed|min:6'
+            'name' => 'required|string|max:255|unique:roles,name',
+            'display_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'permissions' => 'required|array'
         ];
     }
 
@@ -44,13 +45,13 @@ class UserRegisterRequest extends FormRequest
             'name.required' => 'O campo nome é obrigatório.',
             'name.string' => 'O nome não pode ser numérico.',
             'name.max' => 'O nome não pode ter mais que :max caracteres.',
-            'email.required' => 'O campo e-mail é obrigatório.',
-            'email.email' => 'Por favor digite um e-mail válido.',
-            'email.unique' => 'O e-mail já foi cadastrado.',
-            'email.max' => 'O e-mail não pode ter mais que :max caracteres.',
-            'password.required' => 'O campo senha é obrigatório.',
-            'password.min' => 'A senha deve ter no mímino :min caracteres.',
-            'password.confirmed' => 'A confirmação da senha não corresponde.'
+            'name.unique' => 'O nome já foi cadastrado.',
+            'display_name.required' => 'O campo nome de exibição é obrigatório.',
+            'display_name.max' => 'O nome de exibição não pode ter mais que :max caracteres.',
+            'description.required' => 'O campo descrição é obrigatório.',
+            'description.max' => 'O descrição não pode ter mais que :max caracteres.',
+            'permissions.required' => 'O campo permissões é obrigatório.',
+            'permissions.array' => 'O campo permissões deve ser um array.'
         ];
     }
 

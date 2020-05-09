@@ -4,10 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\Permission;
-use Illuminate\Http\Request;
+use OpenApi\Annotations\Get;
+use OpenApi\Annotations\Put;
+use OpenApi\Annotations\Post;
+use OpenApi\Annotations\Items;
+use OpenApi\Annotations\Delete;
+use OpenApi\Annotations\Schema;
 use Illuminate\Http\JsonResponse;
+use OpenApi\Annotations\Property;
+use OpenApi\Annotations\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
+use OpenApi\Annotations\MediaType;
+use OpenApi\Annotations\Parameter;
+use OpenApi\Annotations\RequestBody;
+use App\Http\Requests\RoleStoreRequest;
+use App\Http\Requests\RoleUpdateRequest;
 
 
 class RoleController extends Controller
@@ -30,67 +41,48 @@ class RoleController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * @Get(
+     *     path="/roles",
+     *     tags={"Roles"},
+     *     summary="Lista de perfis.",
+     *     security={{ "apiAuth": {} }},
+     *     @Response(
+     *         response="200",
+     *         description="Resposta Operacional Normal",
+     *         @MediaType(
+     *             mediaType="application/json",
+     *             @Schema(
+     *                 allOf={
+     *                     @Schema(ref="#/components/schemas/ApiResponse"),
+     *                     @Schema(
+     *                         type="object",
+     *                         @Property(property="data", ref="#/components/schemas/RolesPaginateResponse")
+     *                     )
+     *                 }
+     *             )
+     *         )
+     *     ),
+     *     @Response(response="401",description="Não autorizado"),
+     *     @Response(response="403",description="Sem permissão de acesso")
+     * )
      *
-     * @return mixed
+     * @return JsonResponse
      */
     public function index()
     {
-        return $this->role->orderBy('id','DESC')->paginate(5);
+        $role = $this->role->orderBy('id','DESC')->paginate(5);
+
+        return response()->json(['success' => true, 'code' => 200, 'data' => $role], 200);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostre o formulário para criar um novo perfil.
      *
      * @return mixed
      */
     public function create()
     {
         return $this->permission->pluck('display_name','id');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return JsonResponse
-     * @throws ValidationException
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|unique:roles,name',
-            'display_name' => 'required',
-            'description' => 'required',
-            'permissions' => 'required',
-        ]);
-
-        //create the new role
-        $role = new Role();
-        $role->name = $request->input('name');
-        $role->display_name = $request->input('display_name');
-        $role->description = $request->input('description');
-        $role->save();
-
-        //attach the selected permissions
-        foreach ($request->input('permissions') as $key => $value) {
-            $role->attachPermission($value);
-        }
-
-        return response()->json(['data' => ['message' => 'Role created successfully']]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return JsonResponse
-     */
-    public function show($id)
-    {
-        $role = $this->role->with('permissions')->findOrFail($id);
-
-        return response()->json($role);
     }
 
     /**
@@ -109,25 +101,162 @@ class RoleController extends Controller
             ->pluck('permission_id')
             ->toArray();
 
-        return response()->json([$role, $permissions]);
+        return response()->json(['success' => true, 'code' => 200, 'data' => [$role, $permissions]], 200);
     }
 
     /**
-     * Update the specified resource in storage.
+     * @Post(
+     *     path="/roles",
+     *     tags={"Roles"},
+     *     summary="Criar novo perfil.",
+     *     security={{ "apiAuth": {} }},
+     *     @Parameter(
+     *         name="permissions[]",
+     *         in="query",
+     *         description="Permissões do Perfil",
+     *         required=true,
+     *         @Schema(type="array", @Items(type="integer"))
+     *     ),
+     *     @RequestBody(
+     *         @MediaType(
+     *             mediaType="application/json",
+     *             @Schema(
+     *                 required={"name", "display_name", "description"},
+     *                 @Property(property="name", type="string", description="Nome do Perfil"),
+     *                 @Property(property="display_name", type="string", description="Nome de Exibição"),
+     *                 @Property(property="description", type="string", description="Descrição")
+     *             )
+     *         )
+     *     ),
+     *     @Response(
+     *         response="200",
+     *         description="Resposta Operacional Normal",
+     *         @MediaType(
+     *             mediaType="application/json",
+     *             @Schema(
+     *                 allOf={
+     *                     @Schema(ref="#/components/schemas/ApiResponse")
+     *                 }
+     *             )
+     *         )
+     *     ),
+     *     @Response(response="401",description="Não autorizado"),
+     *     @Response(response="403",description="Sem permissão de acesso")
+     * )
      *
-     * @param Request $request
+     * @param RoleStoreRequest $request
+     * @return JsonResponse
+     */
+    public function store(RoleStoreRequest $request)
+    {
+        $role = new Role();
+        $role->name = $request->input('name');
+        $role->display_name = $request->input('display_name');
+        $role->description = $request->input('description');
+        $role->save();
+
+        foreach ($request->input('permissions') as $key => $value) {
+            $role->attachPermission($value);
+        }
+
+        return response()->json(['success' => true, 'code' => 200, 'data' => ['message' => 'Operação realizada com sucesso.']], 200);
+    }
+
+    /**
+     * @Get(
+     *     path="/roles/{id}",
+     *     tags={"Roles"},
+     *     summary="Listar perfil por ID.",
+     *     security={{ "apiAuth": {} }},
+     *     @Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id do Perfil",
+     *         required=true,
+     *         @Schema(type="integer")
+     *     ),
+     *     @Response(
+     *         response="200",
+     *         description="Resposta Operacional Normal",
+     *         @MediaType(
+     *             mediaType="application/json",
+     *             @Schema(
+     *                 allOf={
+     *                     @Schema(ref="#/components/schemas/ApiResponse"),
+     *                     @Schema(
+     *                         type="object",
+     *                         @Property(property="data", ref="#/components/schemas/RoleProperty")
+     *                     )
+     *                 }
+     *             )
+     *         )
+     *     ),
+     *     @Response(response="401",description="Não autorizado"),
+     *     @Response(response="403",description="Sem permissão de acesso")
+     * )
+     *
+     * @param $id
+     * @return JsonResponse
+     */
+    public function show($id)
+    {
+        $role = $this->role->with('permissions')->findOrFail($id);
+
+        return response()->json(['success' => true, 'code' => 200, 'data' => $role], 200);
+    }
+
+    /**
+     * @Put(
+     *     path="/roles/{id}",
+     *     tags={"Roles"},
+     *     summary="Atualizar perfil.",
+     *     security={{ "apiAuth": {} }},
+     *     @Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id do Perfil",
+     *         required=true,
+     *         @Schema(type="integer")
+     *     ),
+     *     @Parameter(
+     *         name="permissions[]",
+     *         in="query",
+     *         description="Permissões do Perfil",
+     *         required=true,
+     *         @Schema(type="array", @Items(type="integer"))
+     *     ),
+     *     @RequestBody(
+     *         @MediaType(
+     *             mediaType="application/json",
+     *             @Schema(
+     *                 required={"display_name", "description"},
+     *                 @Property(property="display_name", type="string", description="Nome de Exibição"),
+     *                 @Property(property="description", type="string", description="Descrição")
+     *             )
+     *         )
+     *     ),
+     *     @Response(
+     *         response="200",
+     *         description="Resposta Operacional Normal",
+     *         @MediaType(
+     *             mediaType="application/json",
+     *             @Schema(
+     *                 allOf={
+     *                     @Schema(ref="#/components/schemas/ApiResponse")
+     *                 }
+     *             )
+     *         )
+     *     ),
+     *     @Response(response="401",description="Não autorizado"),
+     *     @Response(response="403",description="Sem permissão de acesso")
+     * )
+     *
+     * @param RoleUpdateRequest $request
      * @param int $id
      * @return JsonResponse
-     * @throws ValidationException
      */
-    public function update(Request $request, $id)
+    public function update($id, RoleUpdateRequest $request)
     {
-        $this->validate($request, [
-            'display_name' => 'required',
-            'description' => 'required',
-            'permissions' => 'required',
-        ]);
-
         //Find the role and update its details
         $role = $this->role->findOrFail($id);
         $role->display_name = $request->input('display_name');
@@ -142,11 +271,38 @@ class RoleController extends Controller
             $role->attachPermission($value);
         }
 
-        return response()->json(['data' => ['message' => 'Role updated successfully']]);
+        return response()->json(['success' => true, 'code' => 200, 'data' => ['message' => 'Operação realizada com sucesso.']], 200);
+
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @Delete(
+     *     path="/roles/{id}",
+     *     tags={"Roles"},
+     *     summary="Deletar perfil e permissões em cascata.",
+     *     security={{ "apiAuth": {} }},
+     *     @Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Id do Perfil",
+     *         required=true,
+     *         @Schema(type="integer")
+     *     ),
+     *     @Response(
+     *         response="200",
+     *         description="Resposta Operacional Normal",
+     *         @MediaType(
+     *             mediaType="application/json",
+     *             @Schema(
+     *                 allOf={
+     *                     @Schema(ref="#/components/schemas/ApiResponse")
+     *                 }
+     *             )
+     *         )
+     *     ),
+     *     @Response(response="401",description="Não autorizado"),
+     *     @Response(response="403",description="Sem permissão de acesso")
+     * )
      *
      * @param int $id
      * @return JsonResponse
@@ -157,7 +313,8 @@ class RoleController extends Controller
 
         $role->delete();
 
-        return response()->json(['data' => ['message' => 'Role deleted successfully']]);
+        return response()->json(['success' => true, 'code' => 200, 'data' => ['message' => 'Operação realizada com sucesso.']], 200);
+
     }
 
 }

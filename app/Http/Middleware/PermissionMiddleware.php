@@ -39,7 +39,7 @@ class PermissionMiddleware
             return response()
                 ->json([
                     'success' => false,
-                    'status' => 403,
+                    'code' => 403,
                     'message' => 'Sem permissão de acesso!!'
                 ], 403);
         }

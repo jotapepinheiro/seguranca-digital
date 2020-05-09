@@ -6,6 +6,7 @@
 1. Controle de permissão de usuários ACL.
 2. Autenticação com JWT.
 3. QueryBuilder Eloquent ORM.
+4. Swagger API REST.
 
 ## Qual o objetivo deste repositório?
 1. Processo seletivo para a empresa [SQUADRA Tecnologia](https://www.squadra.com.br).
@@ -52,7 +53,19 @@
 ## Importar Endpoits da API para o [Insomia](https://insomnia.rest/download)
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Squadra%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fjotapepinheiro%2Fseguranca-digital%2Fmaster%2Fdoc%2Farquivos%2FInsomnia_export.json)
 
-![Insomia](doc/img/insomia.gif)
+![Insomia](doc/img/insomia.png)
+
+---
+## Gerar Documentação do Swagger
+```shell script
+# Nota: O comando abaixo irá gerar a documentação da API conforme as anotações no código PHP. 
+> php artisan swagger-lume:generate
+
+# Para acessar a documentação da API acesse a url abaixo. 
+> /api/documentation
+```
+
+![Swagger](doc/img/swagger.png)
 
 ---
 ## Como executar o projeto?

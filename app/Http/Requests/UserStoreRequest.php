@@ -6,7 +6,7 @@ use Urameshibr\Requests\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UserRegisterRequest extends FormRequest
+class UserStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,8 @@ class UserRegisterRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email:filter|max:255|unique:users',
-            'password' => 'required|confirmed|min:6'
+            'password' => 'required|confirmed|min:6',
+            'roles' => 'required|array'
         ];
     }
 
@@ -50,7 +51,9 @@ class UserRegisterRequest extends FormRequest
             'email.max' => 'O e-mail não pode ter mais que :max caracteres.',
             'password.required' => 'O campo senha é obrigatório.',
             'password.min' => 'A senha deve ter no mímino :min caracteres.',
-            'password.confirmed' => 'A confirmação da senha não corresponde.'
+            'password.confirmed' => 'A confirmação da senha não corresponde.',
+            'roles.required' => 'O campo perfil é obrigatório.',
+            'roles.array' => 'O campo perfil deve ser um array.'
         ];
     }
 
