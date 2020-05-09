@@ -12,6 +12,7 @@
 1. Processo seletivo para a empresa [SQUADRA Tecnologia](https://www.squadra.com.br).
 2. Criar um cadastro de "sistemas" e controle de justificativa de alterações.
 3. Executar consultas avançadas em uma query.
+4. Documentar o projeto com o Swagger.
 
 --- 
 ## O que é necessário para configurar?
