@@ -12,7 +12,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ---
 
-## O que este repositório contém?
+## O que este repositório contém
 
 1. Controle de permissão de usuários ACL.
 2. Autenticação com JWT.
@@ -21,7 +21,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ---
 
-## Qual o objetivo deste repositório?
+## Qual o objetivo deste repositório
 
 1. Processo seletivo para a empresa [SQUADRA Tecnologia][l-Squadra].
 2. Criar um cadastro de "sistemas" e controle de justificativa de alterações.
@@ -30,7 +30,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ---
 
-## O que é necessário para configurar?
+## O que é necessário para configurar
 
 1. PHP >= 7.2 com requisitos de extensão, conforme descrito na documentação do [Lumen][l-Lumen].
 3. [Composer][l-Composer] em uma Versão estável.
@@ -38,7 +38,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ---
 
-## Como instalar?
+## Como instalar
 
 ```shell script
 # Instalar todos os pacotes necessários para executar o aplicativo
@@ -66,7 +66,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ---
 
-## Qual o modelo do diagrama?
+## Qual o modelo do diagrama
 
 ![Diagrama}][i-Diagrama]
 
@@ -79,7 +79,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ---
 
-## Como executar o projeto?
+## Como executar o projeto
 
 ```shell script
 # Você pode executá-lo no localhost ou pode configurar um virtualhost local
@@ -92,7 +92,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ---
 
-## Como gerar/acessar a documentação do Swagger?
+## Como gerar/acessar a documentação do Swagger
 
 ```shell script
 # Nota: O comando abaixo irá gerar a documentação da API conforme as anotações no código PHP. 
@@ -106,7 +106,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ---
 
-## Como posso ver as rotas da API?
+## Como posso ver as rotas da API
 
 ```shell script
 # Lista todas as rotas definidas no projeto 
