@@ -1,27 +1,39 @@
-# Projeto Sistema de Segurança Digital - Versão 1.0 
+# Projeto Sistema de Segurança Digital - Versão 1.0
 
-[![SQUADRA Tecnologia}](doc/img/logo.svg)](https://www.squadra.com.br) 
+[![SQUADRA Tecnologia}][i-Squadra]][l-Squadra]
 
+---
+**Bases** | **Versão** | **Acesso**
+--------------- | :---: | :---:
+Desenvolvimento | 1.0   | [link][l-Desenvolvimento]
+Homologação     | 1.0   | [link][l-Homologacao]
+Produção        | 1.0   | [link][l-Producao]
+
+---
 ## O que este repositório contém?
+
 1. Controle de permissão de usuários ACL.
 2. Autenticação com JWT.
 3. QueryBuilder Eloquent ORM.
 4. Swagger API REST.
 
 ## Qual o objetivo deste repositório?
-1. Processo seletivo para a empresa [SQUADRA Tecnologia](https://www.squadra.com.br).
+
+1. Processo seletivo para a empresa [SQUADRA Tecnologia][l-Squadra].
 2. Criar um cadastro de "sistemas" e controle de justificativa de alterações.
 3. Executar consultas avançadas em uma query.
 4. Documentar o projeto com o Swagger.
 
 --- 
 ## O que é necessário para configurar?
-1. PHP >= 7.2 com requisitos de extensão, conforme descrito na documentação do [Lumen](https://lumen.laravel.com/docs/6.x#server-requirements).
-3. [Composer](https://getcomposer.org/) em uma Versão estável.
+
+1. PHP >= 7.2 com requisitos de extensão, conforme descrito na documentação do [Lumen][l-Lumen].
+3. [Composer][l-Composer] em uma Versão estável.
 4. Qualquer banco de dados de sua escolha, eu usei o MySQL.
 
 ---
 ## Como instalar?
+
 ```shell script
 # Instalar todos os pacotes necessários para executar o aplicativo
 > composer install
@@ -48,16 +60,18 @@
 
 ---
 ## Diagrama UML
-![Diagrama}](doc/img/diagrama.png)
+
+![Diagrama}][i-Diagrama]
 
 ---
-## Importar Endpoits da API para o [Insomia](https://insomnia.rest/download)
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Squadra%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fjotapepinheiro%2Fseguranca-digital%2Fmaster%2Fdoc%2Farquivos%2FInsomnia_export.json)
+## Importar Endpoits da API para o [Insomia][l-Insomia]
+[![Importar Insomnia}][i-Insomia-Run]][l-Insomia-Import]
 
-![Insomia](doc/img/insomia.png)
+![Insomia][i-Insomia]
 
 ---
 ## Gerar/Acessar a documentação do Swagger
+
 ```shell script
 # Nota: O comando abaixo irá gerar a documentação da API conforme as anotações no código PHP. 
 > php artisan swagger-lume:generate
@@ -66,10 +80,11 @@
 > /api/documentation
 ```
 
-![Swagger](doc/img/swagger.png)
+![Swagger][i-Swagger]
 
 ---
 ## Como executar o projeto?
+
 ```shell script
 # Você pode executá-lo no localhost ou pode configurar um virtualhost local
 # O servidor fica a sua escolha entre nginx ou apache
@@ -80,12 +95,14 @@
 ```
 
 ## Como você pode ver as rotas da API?
+
 ```shell script
 # Lista todas as rotas definidas no projeto 
 > php artisan route:list
 ```
 
 ## Consultar sistemas cadastrados
+
 ```
 # Importante: O final da url deve conter os parâmetros api/v1. 
 # Exemplo: http://segurancadigital.test/api/v1
@@ -131,16 +148,19 @@
 ```
 
 ## Listar sistema por ID
+
 ```
 > /api/v1/sistemas/20
 ```
 
 ## Listar histórico de alterações de um sistema por ID
+
 ```
 > /api/v1/sistemas/historico/18
 ```
 
 ## Usuários do sistema
+
 ```
 # Listar todos usuários cadastrados
 > /api/v1/users
@@ -166,12 +186,15 @@
 ```
 
 ## Login
+
 ```
 > /api/v1/auth/login
 ```
+
 Se o parâmetro "remember" for enviado como "true", o token JWT irá expirar em 1 semana, caso contrário 1 hora.
-Este tempo pode se definido no arquivo .env
+Este tempo pode se definido no arquivo .env:
 JWT_TTL e JWT_TTL_REMEMBER_ME
+
 ```json
 {
 	"email": "super@super.com",
@@ -181,3 +204,17 @@ JWT_TTL e JWT_TTL_REMEMBER_ME
 
 ```
 
+[i-Squadra]: doc/img/logo.svg "SQUADRA Tecnologia"
+[i-Diagrama]: doc/img/diagrama.png "Diagrama"
+[i-Insomia]: doc/img/insomia.png "Insomia"
+[i-Insomia-Run]: https://insomnia.rest/images/run.svg "Importar Insomia"
+[i-Swagger]: doc/img/swagger.png "Swagger"
+
+[l-Squadra]: https://www.squadra.com.br
+[l-Lumen]: https://lumen.laravel.com/docs/6.x#server-requirements
+[l-Insomia]: https://insomnia.rest/download
+[l-Insomia-Import]: https://insomnia.rest/run/?label=Squadra%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fjotapepinheiro%2Fseguranca-digital%2Fmaster%2Fdoc%2Farquivos%2FInsomnia_export.json
+[l-Composer]: https://getcomposer.org
+[l-Desenvolvimento]: http://segurancadigital.test
+[l-Homologacao]: http://segurancadigital.test
+[l-Producao]: http://segurancadigital.test
