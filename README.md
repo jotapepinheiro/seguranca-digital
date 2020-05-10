@@ -66,7 +66,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ---
 
-## Diagrama UML
+## Qual o modelo do diagrama?
 
 ![Diagrama}][i-Diagrama]
 
@@ -106,7 +106,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ---
 
-## Como você pode ver as rotas da API?
+## Como posso ver as rotas da API?
 
 ```shell script
 # Lista todas as rotas definidas no projeto 
