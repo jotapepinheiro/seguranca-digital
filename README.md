@@ -17,6 +17,7 @@ Produção        | 1.0   | [link][l-Producao]
 3. QueryBuilder Eloquent ORM.
 4. Swagger API REST.
 
+---
 ## Qual o objetivo deste repositório?
 
 1. Processo seletivo para a empresa [SQUADRA Tecnologia][l-Squadra].
@@ -70,19 +71,6 @@ Produção        | 1.0   | [link][l-Producao]
 ![Insomia][i-Insomia]
 
 ---
-## Gerar/Acessar a documentação do Swagger
-
-```shell script
-# Nota: O comando abaixo irá gerar a documentação da API conforme as anotações no código PHP. 
-> php artisan swagger-lume:generate
-
-# Para acessar a documentação da API acesse a url abaixo. 
-> /api/documentation
-```
-
-![Swagger][i-Swagger]
-
----
 ## Como executar o projeto?
 
 ```shell script
@@ -94,6 +82,19 @@ Produção        | 1.0   | [link][l-Producao]
 > php artisan serve
 ```
 
+---
+## Como gerar/acessar a documentação do Swagger?
+
+```shell script
+# Nota: O comando abaixo irá gerar a documentação da API conforme as anotações no código PHP. 
+> php artisan swagger-lume:generate
+
+# Para acessar a documentação da API acesse a url abaixo. 
+> /api/documentation
+```
+
+![Swagger][i-Swagger]
+
 ## Como você pode ver as rotas da API?
 
 ```shell script
@@ -101,10 +102,10 @@ Produção        | 1.0   | [link][l-Producao]
 > php artisan route:list
 ```
 
-## Consultar sistemas cadastrados
+## Endpoits de consultas de sistemas cadastrados
 
 ```
-# Importante: O final da url deve conter os parâmetros api/v1. 
+# Importante: O final da url deve conter os parâmetros api/v1.
 # Exemplo: http://segurancadigital.test/api/v1
 
 # Exibir todos.
@@ -147,19 +148,19 @@ Produção        | 1.0   | [link][l-Producao]
 > /api/v1/sistemas?include=updatedBy&filter[updatedBy.name]=Pedro
 ```
 
-## Listar sistema por ID
+## Endpoit para listar um sistema por ID
 
 ```
 > /api/v1/sistemas/20
 ```
 
-## Listar histórico de alterações de um sistema por ID
+## Endpoit para listar histórico de alterações de um sistema por ID
 
 ```
 > /api/v1/sistemas/historico/18
 ```
 
-## Usuários do sistema
+## Endpoits de usuários do sistema
 
 ```
 # Listar todos usuários cadastrados
@@ -185,7 +186,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ```
 
-## Login
+## Endpoit de Login
 
 ```
 > /api/v1/auth/login
