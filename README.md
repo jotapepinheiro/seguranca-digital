@@ -3,6 +3,7 @@
 [![SQUADRA Tecnologia}][i-Squadra]][l-Squadra]
 
 ---
+
 **Bases** | **Versão** | **Acesso**
 --------------- | :---: | :---:
 Desenvolvimento | 1.0   | [link][l-Desenvolvimento]
@@ -10,6 +11,7 @@ Homologação     | 1.0   | [link][l-Homologacao]
 Produção        | 1.0   | [link][l-Producao]
 
 ---
+
 ## O que este repositório contém?
 
 1. Controle de permissão de usuários ACL.
@@ -18,6 +20,7 @@ Produção        | 1.0   | [link][l-Producao]
 4. Swagger API REST.
 
 ---
+
 ## Qual o objetivo deste repositório?
 
 1. Processo seletivo para a empresa [SQUADRA Tecnologia][l-Squadra].
@@ -25,7 +28,8 @@ Produção        | 1.0   | [link][l-Producao]
 3. Executar consultas avançadas em uma query.
 4. Documentar o projeto com o Swagger.
 
---- 
+---
+
 ## O que é necessário para configurar?
 
 1. PHP >= 7.2 com requisitos de extensão, conforme descrito na documentação do [Lumen][l-Lumen].
@@ -33,6 +37,7 @@ Produção        | 1.0   | [link][l-Producao]
 4. Qualquer banco de dados de sua escolha, eu usei o MySQL.
 
 ---
+
 ## Como instalar?
 
 ```shell script
@@ -60,17 +65,20 @@ Produção        | 1.0   | [link][l-Producao]
 ```
 
 ---
+
 ## Diagrama UML
 
 ![Diagrama}][i-Diagrama]
 
 ---
+
 ## Importar Endpoits da API para o [Insomia][l-Insomia]
 [![Importar Insomnia}][i-Insomia-Run]][l-Insomia-Import]
 
 ![Insomia][i-Insomia]
 
 ---
+
 ## Como executar o projeto?
 
 ```shell script
@@ -83,6 +91,7 @@ Produção        | 1.0   | [link][l-Producao]
 ```
 
 ---
+
 ## Como gerar/acessar a documentação do Swagger?
 
 ```shell script
@@ -95,12 +104,16 @@ Produção        | 1.0   | [link][l-Producao]
 
 ![Swagger][i-Swagger]
 
+---
+
 ## Como você pode ver as rotas da API?
 
 ```shell script
 # Lista todas as rotas definidas no projeto 
 > php artisan route:list
 ```
+
+---
 
 ## Endpoits de consultas de sistemas cadastrados
 
@@ -191,6 +204,8 @@ Produção        | 1.0   | [link][l-Producao]
 ```
 > /api/v1/auth/login
 ```
+
+---
 
 Se o parâmetro "remember" for enviado como "true", o token JWT irá expirar em 1 semana, caso contrário 1 hora.
 Este tempo pode se definido no arquivo .env:
