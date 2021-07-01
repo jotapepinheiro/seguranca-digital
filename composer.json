@@ -9,16 +9,19 @@
         "darkaonline/swagger-lume": "6.*",
         "flipbox/lumen-generator": "^6.0",
         "gghughunishvili/entrust": "^2.0",
+        "illuminate/redis": "6.*",
         "laravel/lumen-framework": "^6.0",
         "laravelista/lumen-vendor-publish": "^6.0",
+        "predis/predis": "^1.1",
         "spatie/laravel-query-builder": "^2.8",
         "tymon/jwt-auth": "dev-develop",
         "urameshibr/lumen-form-request": "^1.5"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.4",
-        "phpunit/phpunit": "^8.0",
-        "mockery/mockery": "^1.0"
+        "mockery/mockery": "^1.0",
+        "phpstan/phpstan": "^0.12.90",
+        "phpunit/phpunit": "^8.0"
     },
     "autoload": {
         "classmap": [

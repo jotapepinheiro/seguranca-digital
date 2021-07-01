@@ -62,6 +62,12 @@ $app->singleton(
 
 $app->configure('app');
 
+$app->configure('cache');
+
+$app->configure('database');
+
+$app->configure('entrust');
+
 $app->configure('permission');
 
 $app->configure('swagger-lume');
@@ -108,7 +114,9 @@ $app->configure('swagger-lume');
  $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
  $app->register(Zizaco\Entrust\EntrustServiceProvider::class);
  $app->register(Spatie\QueryBuilder\QueryBuilderServiceProvider::class);
- $app->register(\SwaggerLume\ServiceProvider::class);
+ $app->register(SwaggerLume\ServiceProvider::class);
+ $app->register(Illuminate\Redis\RedisServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

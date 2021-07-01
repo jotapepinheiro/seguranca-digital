@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
 
 class PermissionMiddleware
 {
@@ -24,12 +25,12 @@ class PermissionMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Closure $next
-     * @param  $permissions
+     * @param Request $request
+     * @param Closure $next
+     * @param $permissions
      * @return mixed
      */
-    public function handle($request, Closure $next, $permissions)
+    public function handle(Request $request, Closure $next, $permissions)
     {
         if (!is_array($permissions)) {
             $permissions = explode(self::DELIMITER, $permissions);

@@ -15,12 +15,12 @@ class CreateControlesTable extends Migration
     {
         Schema::create('controles', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('ID de identificação do controle');
-            $table->bigInteger('sistema_id')->comment('ID de referência do sistema')->unsigned()->index();
+            $table->bigInteger('system_id')->comment('ID de referência do sistema')->unsigned()->index();
             $table->bigInteger('user_id')->comment('ID de referência do usuário')->unsigned()->index();
 
-            $table->string('justificativa', 500)->comment('Justificativa registrada na última para alteração do sistema.');
+            $table->string('justification', 500)->comment('Justificativa registrada na última para alteração do sistema.');
 
-            $table->foreign('sistema_id')->references('id')->on('sistemas')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('system_id')->references('id')->on('systems')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Responses\Auth;
+namespace App\Http\Responses\Roles;
 
 use OpenApi\Annotations\Items;
 use OpenApi\Annotations\Property;

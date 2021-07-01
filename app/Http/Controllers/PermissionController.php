@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Permission;
+use App\Models\Permission;
 use OpenApi\Annotations\Put;
 use OpenApi\Annotations\Get;
 use OpenApi\Annotations\Post;
@@ -60,7 +60,7 @@ class PermissionController extends Controller
      *
      * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $permission = $this->permission->orderBy('id','DESC')->paginate(50);
 
@@ -103,7 +103,7 @@ class PermissionController extends Controller
      * @param PermissionStoreRequest $request
      * @return JsonResponse
      */
-    public function store(PermissionStoreRequest $request)
+    public function store(PermissionStoreRequest $request): JsonResponse
     {
         $this->permission->create($request->all());
 
@@ -146,7 +146,7 @@ class PermissionController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function show($id)
+    public function show($id): JsonResponse
     {
         $permission = $this->permission->findOrFail($id);
 
@@ -192,11 +192,11 @@ class PermissionController extends Controller
      *     @Response(response="403",description="Sem permissão de acesso")
      * )
      *
-     * @param PermissionStoreRequest $request
      * @param int $id
+     * @param PermissionUpdateRequest $request
      * @return JsonResponse
      */
-    public function update($id, PermissionUpdateRequest $request)
+    public function update(int $id, PermissionUpdateRequest $request): JsonResponse
     {
         $permission = $this->permission->findOrFail($id);
 
@@ -237,7 +237,7 @@ class PermissionController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         $permission = $this->permission->findOrFail($id);
 

@@ -11,7 +11,7 @@
     },
     "servers": [
         {
-            "url": "http://segurancadigital.test/api/v1",
+            "url": "http://segurancadigital.local/api/v1",
             "description": "Ambiente de Desenvolvimento"
         },
         {
@@ -783,13 +783,13 @@
                 ]
             }
         },
-        "/sistemas": {
+        "/systems": {
             "get": {
                 "tags": [
-                    "Sistemas"
+                    "Systems"
                 ],
                 "summary": "Lista de sistemas.",
-                "operationId": "App\\Http\\Controllers\\SistemaController::index",
+                "operationId": "App\\Http\\Controllers\\SystemController::index",
                 "parameters": [
                     {
                         "name": "include",
@@ -800,7 +800,7 @@
                         }
                     },
                     {
-                        "name": "filter[descricao]",
+                        "name": "filter[description]",
                         "in": "query",
                         "description": "Filtrar por descrição do sistema",
                         "schema": {
@@ -808,7 +808,7 @@
                         }
                     },
                     {
-                        "name": "filter[sigla]",
+                        "name": "filter[initial]",
                         "in": "query",
                         "description": "Filtrar por sigla do sistema",
                         "schema": {
@@ -885,7 +885,7 @@
                                         {
                                             "properties": {
                                                 "data": {
-                                                    "$ref": "#/components/schemas/SistemasPaginateResponse"
+                                                    "$ref": "#/components/schemas/SystemsPaginateResponse"
                                                 }
                                             },
                                             "type": "object"
@@ -910,10 +910,10 @@
             },
             "post": {
                 "tags": [
-                    "Sistemas"
+                    "Systems"
                 ],
                 "summary": "Criar novo sistema.",
-                "operationId": "App\\Http\\Controllers\\SistemaController::store",
+                "operationId": "App\\Http\\Controllers\\SystemController::store",
                 "parameters": [
                     {
                         "name": "status",
@@ -923,8 +923,8 @@
                         "schema": {
                             "type": "string",
                             "enum": [
-                                "ativo",
-                                "cancelado"
+                                "active",
+                                "canceled"
                             ]
                         }
                     }
@@ -934,15 +934,15 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "descricao",
-                                    "sigla"
+                                    "description",
+                                    "initial"
                                 ],
                                 "properties": {
-                                    "descricao": {
+                                    "description": {
                                         "description": "Descrição",
                                         "type": "string"
                                     },
-                                    "sigla": {
+                                    "initial": {
                                         "description": "Sigla",
                                         "type": "string"
                                     },
@@ -989,13 +989,13 @@
                 ]
             }
         },
-        "/sistemas/historico/{id}": {
+        "/systems/historic/{id}": {
             "get": {
                 "tags": [
-                    "Sistemas"
+                    "Systems"
                 ],
                 "summary": "Listar histórico de justificativas de alterações de um sistema por ID.",
-                "operationId": "App\\Http\\Controllers\\SistemaController::historico",
+                "operationId": "App\\Http\\Controllers\\SystemController::historico",
                 "parameters": [
                     {
                         "name": "id",
@@ -1020,7 +1020,7 @@
                                         {
                                             "properties": {
                                                 "data": {
-                                                    "$ref": "#/components/schemas/SistemaProperty"
+                                                    "$ref": "#/components/schemas/SystemProperty"
                                                 }
                                             },
                                             "type": "object"
@@ -1044,13 +1044,13 @@
                 ]
             }
         },
-        "/sistemas/{id}": {
+        "/systems/{id}": {
             "get": {
                 "tags": [
-                    "Sistemas"
+                    "Systems"
                 ],
                 "summary": "Listar sistema com o último controles por ID.",
-                "operationId": "App\\Http\\Controllers\\SistemaController::show",
+                "operationId": "App\\Http\\Controllers\\SystemController::show",
                 "parameters": [
                     {
                         "name": "id",
@@ -1075,7 +1075,7 @@
                                         {
                                             "properties": {
                                                 "data": {
-                                                    "$ref": "#/components/schemas/SistemaProperty"
+                                                    "$ref": "#/components/schemas/SystemProperty"
                                                 }
                                             },
                                             "type": "object"
@@ -1100,10 +1100,10 @@
             },
             "put": {
                 "tags": [
-                    "Sistemas"
+                    "Systems"
                 ],
                 "summary": "Atualizar sistema e criar novo controle caso exista o parametro justificativa.",
-                "operationId": "App\\Http\\Controllers\\SistemaController::update",
+                "operationId": "App\\Http\\Controllers\\SystemController::update",
                 "parameters": [
                     {
                         "name": "id",
@@ -1122,8 +1122,8 @@
                         "schema": {
                             "type": "string",
                             "enum": [
-                                "ativo",
-                                "cancelado"
+                                "active",
+                                "canceled"
                             ]
                         }
                     }
@@ -1133,15 +1133,15 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "descricao",
-                                    "sigla"
+                                    "description",
+                                    "initial"
                                 ],
                                 "properties": {
-                                    "descricao": {
+                                    "description": {
                                         "description": "Descrição",
                                         "type": "string"
                                     },
-                                    "sigla": {
+                                    "initial": {
                                         "description": "Sigla",
                                         "type": "string"
                                     },
@@ -1153,7 +1153,7 @@
                                         "description": "Url",
                                         "type": "string"
                                     },
-                                    "justificativa": {
+                                    "justification": {
                                         "description": "Justificativa",
                                         "type": "string"
                                     }
@@ -1193,10 +1193,10 @@
             },
             "delete": {
                 "tags": [
-                    "Sistemas"
+                    "Systems"
                 ],
                 "summary": "Deletar sistema e controle em cascata.",
-                "operationId": "App\\Http\\Controllers\\SistemaController::destroy",
+                "operationId": "App\\Http\\Controllers\\SystemController::destroy",
                 "parameters": [
                     {
                         "name": "id",
@@ -1966,20 +1966,20 @@
                 },
                 "type": "object"
             },
-            "SistemaProperty": {
-                "title": "Sistema",
+            "SystemProperty": {
+                "title": "Systems",
                 "description": "Sistema",
                 "properties": {
                     "id": {
                         "description": "ID",
                         "type": "integer"
                     },
-                    "descricao": {
-                        "description": "descricao",
+                    "description": {
+                        "description": "description",
                         "type": "string"
                     },
-                    "sigla": {
-                        "description": "sigla",
+                    "initial": {
+                        "description": "initial",
                         "type": "string"
                     },
                     "email": {
@@ -2013,8 +2013,8 @@
                 },
                 "type": "object"
             },
-            "SistemasPaginateResponse": {
-                "title": "Sistemas Paginate",
+            "SystemsPaginateResponse": {
+                "title": "Systems Paginate",
                 "description": "Lista de Sistemas com Paginação",
                 "properties": {
                     "current_page": {
@@ -2064,7 +2064,7 @@
                     "data": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/SistemaProperty"
+                            "$ref": "#/components/schemas/SystemProperty"
                         }
                     }
                 },
@@ -2202,7 +2202,7 @@
             "description": "Manter Permissões de Usuários"
         },
         {
-            "name": "Sistemas",
+            "name": "Systems",
             "description": "Manter Sistemas"
         }
     ]

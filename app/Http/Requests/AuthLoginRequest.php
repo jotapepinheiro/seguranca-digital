@@ -13,7 +13,7 @@ class AuthLoginRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,7 +23,7 @@ class AuthLoginRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'email' => 'required|email:filter',
@@ -37,7 +37,7 @@ class AuthLoginRequest extends FormRequest
      * @return array
      */
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'email.required' => 'O campo de e-mail é obrigatório.',

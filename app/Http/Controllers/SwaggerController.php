@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use OpenApi\Annotations\Contact;
-use OpenApi\Annotations\ExternalDocumentation;
-use OpenApi\Annotations\Info;
-use OpenApi\Annotations\Property;
-use OpenApi\Annotations\Schema;
-use OpenApi\Annotations\SecurityScheme;
-use OpenApi\Annotations\Server;
+
 use OpenApi\Annotations\Tag;
+use OpenApi\Annotations\Info;
+use OpenApi\Annotations\Server;
+use OpenApi\Annotations\Schema;
+use OpenApi\Annotations\Contact;
+use OpenApi\Annotations\Property;
+use OpenApi\Annotations\SecurityScheme;
+use OpenApi\Annotations\ExternalDocumentation;
 
 /**
  *
@@ -22,7 +23,7 @@ use OpenApi\Annotations\Tag;
  *         name="João Paulo Pinheiro"
  *     )
  * )
- * @Server(url="http://segurancadigital.test/api/v1", description="Ambiente de Desenvolvimento")
+ * @Server(url="http://segurancadigital.local/api/v1", description="Ambiente de Desenvolvimento")
  * @Server(url="http://segurancadigital.prod/api/v1", description="Ambiente de Produção")
  *
  * @Tag(
@@ -38,7 +39,7 @@ use OpenApi\Annotations\Tag;
  * @Tag(name="Users", description="Manter Usuários")
  * @Tag(name="Roles", description="Manter Perfis de Usuários")
  * @Tag(name="Permissions", description="Manter Permissões de Usuários")
- * @Tag(name="Sistemas", description="Manter Sistemas")
+ * @Tag(name="Systems", description="Manter Sistemas")
  *
  * @Schema(
  *     schema="ApiResponse",

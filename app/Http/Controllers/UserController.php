@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use http\Exception;
+use App\Models\User;
 use OpenApi\Annotations\Get;
 use OpenApi\Annotations\Delete;
 use OpenApi\Annotations\Items;
@@ -60,7 +59,7 @@ class UserController extends Controller
      *
      * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $user = $this->user
             ->with('roles')
@@ -106,7 +105,7 @@ class UserController extends Controller
      * @param UserRegisterRequest $request
      * @return JsonResponse
      */
-    public function register(UserRegisterRequest $request)
+    public function register(UserRegisterRequest $request): JsonResponse
     {
         try {
             $input = $request->only('name', 'email', 'password');
@@ -132,7 +131,7 @@ class UserController extends Controller
                 ];
             }
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             //dd($e->getMessage());
             $code = 500;
             $output = [
@@ -180,7 +179,7 @@ class UserController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function show($id)
+    public function show($id): JsonResponse
     {
         $user = $this->user
             ->with('roles.permissions')
@@ -233,7 +232,7 @@ class UserController extends Controller
      * @param UserStoreRequest $request
      * @return JsonResponse
      */
-    public function store(UserStoreRequest $request)
+    public function store(UserStoreRequest $request): JsonResponse
     {
         try {
             $input = $request->only('name', 'email', 'password', 'roles');
@@ -263,7 +262,7 @@ class UserController extends Controller
                 ];
             }
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             //dd($e->getMessage());
             $code = 500;
             $output = [
@@ -326,7 +325,7 @@ class UserController extends Controller
      * @param UserUpdateRequest $request
      * @return JsonResponse
      */
-    public function update($id, UserUpdateRequest $request)
+    public function update($id, UserUpdateRequest $request): JsonResponse
     {
         $user = $this->user->findOrFail($id);
 
@@ -375,7 +374,7 @@ class UserController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         $user = $this->user->findOrFail($id);
 

@@ -13,7 +13,7 @@ class RoleStoreRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,7 +23,7 @@ class RoleStoreRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'required|string|max:255|unique:roles,name',
@@ -39,7 +39,7 @@ class RoleStoreRequest extends FormRequest
      * @return array
      */
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'O campo nome é obrigatório.',

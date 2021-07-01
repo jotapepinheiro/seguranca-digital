@@ -1,6 +1,6 @@
 <?php
 
-use App\Controle;
+use App\Models\Controle;
 use Illuminate\Database\Seeder;
 
 class ControlesTableSeeder extends Seeder

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\Permission;
+use App\Models\Role;
+use App\Models\Permission;
 use OpenApi\Annotations\Get;
 use OpenApi\Annotations\Put;
 use OpenApi\Annotations\Post;
@@ -68,7 +68,7 @@ class RoleController extends Controller
      *
      * @return JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         $role = $this->role->orderBy('id','DESC')->paginate(5);
 
@@ -91,7 +91,7 @@ class RoleController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function edit($id)
+    public function edit(int $id): JsonResponse
     {
         $role = $this->role->findOrFail($id);
         $permissions = $this->permission->get();
@@ -147,7 +147,7 @@ class RoleController extends Controller
      * @param RoleStoreRequest $request
      * @return JsonResponse
      */
-    public function store(RoleStoreRequest $request)
+    public function store(RoleStoreRequest $request): JsonResponse
     {
         $role = new Role();
         $role->name = $request->input('name');
@@ -198,7 +198,7 @@ class RoleController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function show($id)
+    public function show($id): JsonResponse
     {
         $role = $this->role->with('permissions')->findOrFail($id);
 
@@ -255,7 +255,7 @@ class RoleController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function update($id, RoleUpdateRequest $request)
+    public function update(int $id, RoleUpdateRequest $request): JsonResponse
     {
         //Find the role and update its details
         $role = $this->role->findOrFail($id);
@@ -307,7 +307,7 @@ class RoleController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         $role = $this->role->findOrFail($id);
 

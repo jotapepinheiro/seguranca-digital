@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
 
 class RoleMiddleware
 {
@@ -24,12 +25,12 @@ class RoleMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Closure $next
-     * @param  $roles
+     * @param Request $request
+     * @param Closure $next
+     * @param $roles
      * @return mixed
      */
-    public function handle($request, Closure $next, $roles)
+    public function handle(Request $request, Closure $next, $roles)
     {
         if (!is_array($roles)) {
             $roles = explode(self::DELIMITER, $roles);

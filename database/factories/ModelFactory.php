@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\{User, Sistema, Controle};
+use App\Models\{User, System, Controle};
 use Faker\Generator as Faker;
 
 /*
@@ -16,21 +16,21 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Sistema::class, function (Faker $faker) {
+$factory->define(System::class, function (Faker $faker) {
     return [
-        'descricao' => $faker->unique()->company,
-        'sigla'     => strtoupper(substr($faker->unique()->jobTitle, 0, 10)),
+        'description' => $faker->unique()->company,
+        'initial'     => strtoupper(substr($faker->unique()->jobTitle, 0, 10)),
         'email'     => $faker->unique()->safeEmail,
         'url'       => substr($faker->unique()->url, 0, 50),
-        'status'    => $faker->randomElement(['ativo','cancelado']),
+        'status'    => $faker->randomElement(['active','canceled']),
         'created_by' => User::all()->random()->id
     ];
 });
 
 $factory->define(Controle::class, function (Faker $faker) {
     return [
-        'sistema_id'    => Sistema::all()->random()->id,
+        'system_id'    => System::all()->random()->id,
         'user_id'       => User::all()->random()->id,
-        'justificativa' => $faker->text($maxNbChars = 200)
+        'justification' => $faker->text($maxNbChars = 200)
     ];
 });

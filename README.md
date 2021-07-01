@@ -99,7 +99,7 @@ Produção        | 1.0   | [link][l-Producao]
 > php artisan swagger-lume:generate
 
 # Para acessar a documentação da API acesse a url abaixo. 
-> /api/documentation
+> /api/doc
 ```
 
 ![Swagger][i-Swagger]
@@ -119,7 +119,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ```
 # Importante: O final da url deve conter os parâmetros api/v1.
-# Exemplo: http://segurancadigital.test/api/v1
+# Exemplo: http://segurancadigital.local/api/v1
 
 # Exibir todos.
 > /api/v1/sistemas

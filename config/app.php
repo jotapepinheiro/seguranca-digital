@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Lumen'),
 
+    'jwt_ttl_remember_me' => env('JWT_TTL_REMEMBER_ME', 1),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

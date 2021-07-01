@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -14,9 +15,9 @@ trait RestExceptionHandlerTrait
      *
      * @param Request $request
      * @param Exception $e
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    protected function getJsonResponseForException(Request $request, Exception $e)
+    protected function getJsonResponseForException(Request $request, Exception $e): JsonResponse
     {
         switch(true) {
             case $this->isModelNotFoundException($e):
@@ -34,9 +35,9 @@ trait RestExceptionHandlerTrait
      *
      * @param string $message
      * @param int $statusCode
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    protected function badRequest($message='O pedido não pode ser entendido', $statusCode=400)
+    protected function badRequest(string $message='O pedido não pode ser entendido', int $statusCode=400): JsonResponse
     {
         return $this->jsonResponse(['status' => false, 'code' => $statusCode, 'message' => $message], $statusCode);
     }
@@ -46,9 +47,9 @@ trait RestExceptionHandlerTrait
      *
      * @param string $message
      * @param int $statusCode
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    protected function modelNotFound($message='Registro não encontrado', $statusCode=404)
+    protected function modelNotFound(string $message='Registro não encontrado', int $statusCode=404): JsonResponse
     {
         return $this->jsonResponse(['status' => false, 'code' => $statusCode, 'message' => $message], $statusCode);
     }
@@ -58,9 +59,9 @@ trait RestExceptionHandlerTrait
      *
      * @param array|null $payload
      * @param int $statusCode
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    protected function jsonResponse(array $payload=null, $statusCode=404)
+    protected function jsonResponse(array $payload=null, int $statusCode=404): JsonResponse
     {
         $payload = $payload ?: [];
 
@@ -73,7 +74,7 @@ trait RestExceptionHandlerTrait
      * @param Exception $e
      * @return bool
      */
-    protected function isModelNotFoundException(Exception $e)
+    protected function isModelNotFoundException(Exception $e): bool
     {
         return $e instanceof ModelNotFoundException;
     }

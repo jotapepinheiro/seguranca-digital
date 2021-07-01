@@ -12,11 +12,11 @@ class Controller extends BaseController
     /**
      * Get the token array structure.
      *
-     * @param  string $token
+     * @param string $token
      *
      * @return JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken(string $token): JsonResponse
     {
         $ttl = (int) Auth::factory()->getTTL();
 
@@ -24,7 +24,7 @@ class Controller extends BaseController
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in_minutes' => $ttl,
-            'expires_in_date' => Carbon::now()->addMinute($ttl)->format('d-m-Y H:i:s'),
+            'expires_in_date' => Carbon::now()->addMinutes($ttl)->format('d-m-Y H:i:s'),
         ]], 200);
     }
 }

@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+
+  php-fpm:
+    container_name: ${CONTAINER_NAME}-php
+    build:
+      context: ./docker/php-fpm
+      args:
+        - INSTALL_PHPREDIS=${INSTALL_PHPREDIS}
+        - INSTALL_XDEBUG=${INSTALL_XDEBUG}
+        - INSTALL_OPCACHE=${INSTALL_OPCACHE}
+        - APP_TIMEZONE=${APP_TIMEZONE}
+    restart: always
+    volumes:
+      - appWeb-sync:/var/www/${CONTAINER_NAME}:nocopy
+      #- .:/var/www/${CONTAINER_NAME}:rw,delegated
+    extra_hosts:
+      - "dockerhost:${DOCKER_HOST_IP}"
+    networks:
+      - backend
+
+  mysql:
+    container_name: ${CONTAINER_NAME}-mysql
+    build:
+      context: ./docker/mysql
+      args:
+        - MYSQL_VERSION=${MYSQL_VERSION}
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      TZ: ${CONTAINER_TIMEZONE}
+    volumes:
+      - appMysql-sync:/var/lib/mysql:nocopy
+      #- ${DATA_PATH_HOST}/mysql:/var/lib/mysql:delegated
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    ports:
+      - "${DB_PORT}:3306"
+    networks:
+      - backend
+
+  nginx:
+    container_name: ${CONTAINER_NAME}-nginx
+    build:
+      context: ./docker/nginx
+      args:
+        - PHP_UPSTREAM_CONTAINER=${NGINX_PHP_UPSTREAM_CONTAINER}
+        - PHP_UPSTREAM_PORT=${NGINX_PHP_UPSTREAM_PORT}
+        - CONTAINER_DOMAIN=${CONTAINER_DOMAIN}
+    restart: always
+    ports:
+      - "${NGINX_HOST_HTTP_PORT}:80"
+      - "${NGINX_HOST_HTTPS_PORT}:443"
+    volumes:
+      - appWeb-sync:/var/www/${CONTAINER_NAME}:nocopy
+      #- .:/var/www/${CONTAINER_NAME}:rw,delegated
+      - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
+      - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
+    depends_on:
+      - php-fpm
+    networks:
+      - backend
+
+  redis:
+    container_name: ${CONTAINER_NAME}-redis
+    build:
+      context: ./docker/redis
+    restart: always
+    volumes:
+      - appRedis-sync:/data:nocopy
+      #- ${DATA_PATH_HOST}/redis:/data
+      - ${REDIS_LOG_PATH}:/var/log/redis
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    ports:
+      - "${REDIS_PORT}:6379"
+    depends_on:
+      - php-fpm
+    networks:
+      - backend
+
+  redis-webui:
+    container_name: ${CONTAINER_NAME}-redis-webui
+    build:
+      context: ./docker/redis-webui
+    environment:
+      - ADMIN_USER=${REDIS_WEBUI_USERNAME}
+      - ADMIN_PASS=${REDIS_WEBUI_PASSWORD}
+      - REDIS_1_AUTH=${REDIS_PASSWORD}
+      - REDIS_1_HOST=${REDIS_WEBUI_CONNECT_HOST}
+      - REDIS_1_PORT=${REDIS_WEBUI_CONNECT_PORT}
+    ports:
+      - "${REDIS_WEBUI_PORT}:80"
+    depends_on:
+      - redis
+    networks:
+      - backend
+
+volumes:
+  appMysql-sync:
+    external: true
+  appRedis-sync:
+    external: true
+  appWeb-sync:
+    external: true
+
+networks:
+  backend:
+    driver: bridge

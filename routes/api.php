@@ -1,9 +1,8 @@
 <?php
 
-$router->get('/', function() use ($router) {
-    $now = Carbon\Carbon::now()->format('d/m/Y H:i:s');
-    return env('APP_NAME') . ' - v' . env('APP_VERSION') . ' - ' . config('app.timezone') . ' -  ' . $now ;
-});
+/** @var \Laravel\Lumen\Routing\Router $router */
+
+$router->get('/', 'AppController@index');
 
 $router->group(['prefix' => 'api/v1'], function() use ($router) {
 
@@ -49,14 +48,14 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
             $router->delete('/{id}', ['middleware' => ['permission:permission-delete'], 'uses' => 'PermissionController@destroy']);
         });
 
-        // SISTEMAS
-        $router->group(['prefix' => 'sistemas'], function() use ($router) {
-            $router->get('/', ['middleware' => ['permission:sistema-list'], 'uses' => 'SistemaController@index']);
-            $router->get('/historico/{id}', ['middleware' => ['permission:sistema-list'], 'uses' => 'SistemaController@historico']);
-            $router->get('/{id}', ['middleware' => ['permission:sistema-list'], 'uses' => 'SistemaController@show']);
-            $router->post('/', ['middleware' => ['permission:sistema-create'], 'uses' => 'SistemaController@store']);
-            $router->put('/{id}', ['middleware' => ['permission:sistema-edit'], 'uses' => 'SistemaController@update']);
-            $router->delete('/{id}', ['middleware' => ['permission:sistema-delete'], 'uses' => 'SistemaController@destroy']);
+        // SYSTEMS
+        $router->group(['prefix' => 'systems'], function() use ($router) {
+            $router->get('/', ['middleware' => ['permission:sistema-list'], 'uses' => 'SystemController@index']);
+            $router->get('/historico/{id}', ['middleware' => ['permission:sistema-list'], 'uses' => 'SystemController@historico']);
+            $router->get('/{id}', ['middleware' => ['permission:sistema-list'], 'uses' => 'SystemController@show']);
+            $router->post('/', ['middleware' => ['permission:sistema-create'], 'uses' => 'SystemController@store']);
+            $router->put('/{id}', ['middleware' => ['permission:sistema-edit'], 'uses' => 'SystemController@update']);
+            $router->delete('/{id}', ['middleware' => ['permission:sistema-delete'], 'uses' => 'SystemController@destroy']);
         });
 
     });

@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\AuthLoginRequest;
 use OpenApi\Annotations\Get;
-use OpenApi\Annotations\Parameter;
 use OpenApi\Annotations\Post;
 use OpenApi\Annotations\Schema;
+use Illuminate\Http\JsonResponse;
 use OpenApi\Annotations\Property;
 use OpenApi\Annotations\Response;
+use OpenApi\Annotations\Parameter;
 use OpenApi\Annotations\MediaType;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AuthLoginRequest;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class AuthController extends Controller
 {
@@ -75,12 +76,12 @@ class AuthController extends Controller
      * @param AuthLoginRequest $request
      * @return JsonResponse
      */
-    public function login(AuthLoginRequest $request)
+    public function login(AuthLoginRequest $request): JsonResponse
     {
         $input = $request->only('email', 'password');
 
         if($request->input('remember')) {
-            $token_ttl = env('JWT_TTL_REMEMBER_ME', 1);
+            $token_ttl = config('app.jwt_ttl_remember_me');
             Auth::factory()->setTTL($token_ttl * 10080);
         }
 
@@ -119,7 +120,7 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    public function me()
+    public function me(): JsonResponse
     {
         $user = Auth::user()->load('roles.permissions');
 
@@ -154,7 +155,7 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    public function payoad()
+    public function payoad(): JsonResponse
     {
         $payload = Auth::payload();
 
@@ -191,7 +192,7 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    public function logout()
+    public function logout(): JsonResponse
     {
         Auth::logout();
 
@@ -203,11 +204,11 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    public function refresh()
+    public function refresh(): JsonResponse
     {
         try {
             $newToken = Auth::refresh();
-        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+        } catch (TokenInvalidException $e) {
             return response()->json(['error' => $e->getMessage()], 401);
         }
 
