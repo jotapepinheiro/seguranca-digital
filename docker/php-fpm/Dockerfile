@@ -77,7 +77,7 @@ RUN if [ ${INSTALL_XDEBUG} = true ]; then \
   && docker-php-ext-enable xdebug \
 ;fi
 
-ADD ./xdebug.ini $PHP_INI_DIR/conf.d/
+ADD ./ext-xdebug.ini $PHP_INI_DIR/conf.d/
 
 ###########################################################################
 # Opcache:

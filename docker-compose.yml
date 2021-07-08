@@ -10,6 +10,7 @@ services:
         - INSTALL_PHPREDIS=${INSTALL_PHPREDIS}
         - INSTALL_XDEBUG=${INSTALL_XDEBUG}
         - INSTALL_OPCACHE=${INSTALL_OPCACHE}
+        - INSTALL_APCU=${INSTALL_APCU}
         - APP_TIMEZONE=${APP_TIMEZONE}
     restart: always
     volumes:
@@ -57,8 +58,8 @@ services:
     volumes:
       - appWeb-sync:/var/www/${CONTAINER_NAME}:nocopy
       #- .:/var/www/${CONTAINER_NAME}:rw,delegated
-      - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
-      - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
+      - ${NGINX_HOST_LOG_PATH}:/var/log/nginx:delegated
+      - ${NGINX_SITES_PATH}:/etc/nginx/sites-available:delegated
     depends_on:
       - php-fpm
     networks:
