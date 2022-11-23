@@ -241,9 +241,7 @@ class UserController extends Controller
             if( $user = $this->user->create($input) ) {
 
                 if ($request->has('roles')) {
-                    foreach ($request->input('roles') as $key => $value) {
-                        $user->attachRole($value);
-                    }
+                    $user->roles()->sync($request->input('roles'));
                 }
 
                 $code = 200;
@@ -334,9 +332,7 @@ class UserController extends Controller
         $user->update($input);
 
         if ($request->has('roles')) {
-            foreach ($request->input('roles') as $key => $value) {
-                $user->attachRole($value);
-            }
+            $user->roles()->sync($request->input('roles'));
         }
 
         return response()->json(['success' => true, 'code' => 200, 'data' => ['message' => 'Operação realizada com sucesso.']], 200);

@@ -72,7 +72,7 @@ RUN if [ ${INSTALL_PHPREDIS} = true ]; then \
 ARG INSTALL_XDEBUG=false
 
 RUN if [ ${INSTALL_XDEBUG} = true ]; then \
-  pecl install xdebug-2.9.2 \
+  pecl install xdebug \
   && rm -rf /tmp/pear \
   && docker-php-ext-enable xdebug \
 ;fi
