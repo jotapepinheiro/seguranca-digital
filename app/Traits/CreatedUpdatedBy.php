@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 trait CreatedUpdatedBy
@@ -23,6 +24,26 @@ trait CreatedUpdatedBy
             });
         }
 
+    }
+
+    /**
+     * Converte o atributo created_at de string para data
+     *
+     * @return Carbon|null
+     */
+    public function getCreatedByAttribute(): ?Carbon
+    {
+        return Carbon::make($this->attributes['created_at']);
+    }
+
+    /**
+     * Converte o atributo created_at de string para data
+     *
+     * @return Carbon|null
+     */
+    public function getUpdatedByAttribute(): ?Carbon
+    {
+        return Carbon::make($this->attributes['updated_at']);
     }
 
 }

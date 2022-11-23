@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Zizaco\Entrust\EntrustRole;
 
@@ -16,5 +17,25 @@ class Role extends EntrustRole
     public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(Permission::class);
+    }
+
+    /**
+     * Converte o atributo created_at de string para data
+     *
+     * @return Carbon|null
+     */
+    public function getCreatedAtAttribute(): ?Carbon
+    {
+        return Carbon::make($this->attributes['created_at']);
+    }
+
+    /**
+     * Converte o atributo created_at de string para data
+     *
+     * @return Carbon|null
+     */
+    public function getUpdatedAtAttribute(): ?Carbon
+    {
+        return Carbon::make($this->attributes['updated_at']);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\CreatedUpdatedBy;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -42,4 +43,23 @@ class System extends Model
         return $this->hasOne(Controle::class, 'system_id')->orderBy('id', 'DESC');
     }
 
+    /**
+     * Converte o atributo created_at de string para data
+     *
+     * @return Carbon|null
+     */
+    public function getCreatedAtAttribute(): ?Carbon
+    {
+        return Carbon::make($this->attributes['created_at']);
+    }
+
+    /**
+     * Converte o atributo created_at de string para data
+     *
+     * @return Carbon|null
+     */
+    public function getUpdatedAtAttribute(): ?Carbon
+    {
+        return Carbon::make($this->attributes['updated_at']);
+    }
 }

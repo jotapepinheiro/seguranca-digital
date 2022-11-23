@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\JWT;
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
@@ -50,6 +51,26 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'created_at' => 'datetime:d/m/Y H:i:s',
         'updated_at' => 'datetime:d/m/Y H:i:s',
     ];
+
+    /**
+     * Converte o atributo created_at de string para data
+     *
+     * @return Carbon|null
+     */
+    public function getCreatedAtAttribute(): ?Carbon
+    {
+        return Carbon::make($this->attributes['created_at']);
+    }
+
+    /**
+     * Converte o atributo created_at de string para data
+     *
+     * @return Carbon|null
+     */
+    public function getUpdatedAtAttribute(): ?Carbon
+    {
+        return Carbon::make($this->attributes['updated_at']);
+    }
 
     /**
      * Define all permissions for role Super Admin

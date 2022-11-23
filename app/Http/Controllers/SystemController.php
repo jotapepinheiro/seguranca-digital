@@ -189,8 +189,6 @@ class SystemController extends Controller
     public function historico(int $id): JsonResponse
     {
         $system = $this->system
-            ->with('createdBy')
-            ->with('updatedBy')
             ->with('controles')
             ->with('controles.user')
             ->findOrFail($id);
