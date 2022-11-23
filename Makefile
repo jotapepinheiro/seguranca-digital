@@ -4,23 +4,26 @@
 CONTAINER = segurancadigital
 
 ## —— Docker 🐳  ———————————————————————————————————————————————————————————————
-start: ## Iniciar Docker-Sync
-	docker-sync-stack start;
+start: ## Iniciar Docker
+	docker compose up -d
 
-clean: ## Desligar Docker-Sync
-	docker-sync-stack clean;
+clean: ## Desligar Docker
+	docker compose down
 
-dshell: ## Acessar container do php
-	docker-compose exec php-fpm bash;
+php-shell: ## Acessar container do php
+	docker compose exec php-fpm bash;
+
+nginx-shell: ## Acessar container do php
+	docker compose exec nginx bash;
 
 rebuild-all: ## Rebuild em todos os containers
-	docker-compose down && docker-compose up -d --build;
+	docker compose down && docker compose up -d --build;
 
 rebuild-nginx: ## Rebuild no nginx
-	docker-compose build --no-cache nginx;
+	docker compose build --no-cache nginx;
 
 rebuild-php: ## Rebuild no PHP
-	docker-compose build --no-cache php-fpm;
+	docker compose build --no-cache php-fpm;
 
 reload: ## Reload no nginx
 	docker exec nginx nginx -s reload
@@ -35,6 +38,10 @@ swagger: ## Gerar documentação do Swagger
 migrate: ## Executar Migrate
 	docker exec -ti $(CONTAINER)-php sh -c "cd $(CONTAINER) \
 	&& php artisan migrate"
+
+seed: ## Executar os Seeds
+	docker exec -ti $(CONTAINER)-php sh -c "cd $(CONTAINER) \
+	&& php artisan db:seed"
 
 migrate-fresh: ## Executar Migrate Refresh
 	docker exec -ti $(CONTAINER)-php sh -c "cd $(CONTAINER) \

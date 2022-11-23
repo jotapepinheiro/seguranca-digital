@@ -45,7 +45,7 @@ RUN docker-php-ext-configure gd \
 	&& docker-php-ext-install -j$(nproc) gd
 
 RUN docker-php-ext-install pdo_mysql mysqli
-RUN docker-php-ext-install mbstring zip soap
+RUN docker-php-ext-install mbstring zip soap opcache
 
 ###########################################################################
 # PHP COMPOSER
@@ -72,12 +72,12 @@ RUN if [ ${INSTALL_PHPREDIS} = true ]; then \
 ARG INSTALL_XDEBUG=false
 
 RUN if [ ${INSTALL_XDEBUG} = true ]; then \
-  pecl install xdebug \
+  pecl install xdebug-2.9.2 \
   && rm -rf /tmp/pear \
   && docker-php-ext-enable xdebug \
 ;fi
 
-ADD ./ext-xdebug.ini $PHP_INI_DIR/conf.d/
+ADD ./php-ext-xdebug.ini $PHP_INI_DIR/conf.d/
 
 ###########################################################################
 # Opcache:
@@ -89,7 +89,7 @@ RUN if [ ${INSTALL_OPCACHE} = true ]; then \
     docker-php-ext-install opcache \
 ;fi
 
-ADD ./ext-opcache.ini $PHP_INI_DIR/conf.d/
+ADD ./php-ext-opcache.ini $PHP_INI_DIR/conf.d/
 
 ###########################################################################
 # Apcu:
@@ -102,10 +102,10 @@ RUN if [ ${INSTALL_APCU} = true ]; then \
     && docker-php-ext-enable apcu \
 ;fi
 
-ADD ./ext-apcu.ini $PHP_INI_DIR/conf.d/
+ADD ./php-ext-apcu.ini $PHP_INI_DIR/conf.d/
 
 # PHP.ini
-COPY ./app-php.ini $PHP_INI_DIR/conf.d/
+COPY ./php.ini $PHP_INI_DIR/conf.d/
 COPY ./www.conf /usr/local/etc/php-fpm.d/
 
 USER root
