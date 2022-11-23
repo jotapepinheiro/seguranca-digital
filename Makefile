@@ -61,7 +61,7 @@ composer-show: ## Exibir pacotes do composer
 	composer show -l --direct --outdated
 
 phpstan: ## Analisar código PHP usando PHPSTAN (https://phpstan.org/)
-	./vendor/bin/phpstan analyse
+	php -d memory_limit=-1 ./vendor/bin/phpstan analyse --level=0 app public
 
 phpmd: ## Analisar código PHP usando PHPMD (https://phpmd.org/)
 	./vendor/bin/phpmd src text cleancode,codesize,controversial,design,naming,unusedcode
