@@ -1,6 +1,8 @@
 <?php
 
-/** @var \Laravel\Lumen\Routing\Router $router */
+/** @var Router $router */
+
+use Laravel\Lumen\Routing\Router;
 
 $router->get('/', 'AppController@index');
 

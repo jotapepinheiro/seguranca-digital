@@ -26,7 +26,7 @@ rebuild-php: ## Rebuild no PHP
 	docker compose build --no-cache php-fpm;
 
 reload: ## Reload no nginx
-	docker exec nginx nginx -s reload
+	docker exec -ti $(CONTAINER)-nginx nginx -s reload
 
 ## —— Lumen 🎶 ———————————————————————————————————————————————————————————————
 install: ## Instalar composer

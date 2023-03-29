@@ -13,6 +13,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -36,23 +37,24 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param Exception|Throwable $e
      * @return void
+     * @throws Exception
      */
-    public function report(Exception $exception)
+    public function report(Exception|Throwable $e)
     {
-        parent::report($exception);
+        parent::report($e);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
      * @param Request $request
-     * @param Exception $e
+     * @param Exception|Throwable $e
      * @return Response|JsonResponse
-     * @throws Exception
+     * @throws Throwable
      */
-    public function render($request, Exception $e)
+    public function render($request, Exception|Throwable $e)
     {
         if(!$this->isApiCall($request) || env('APP_DEBUG')) {
             $retval = parent::render($request, $e);

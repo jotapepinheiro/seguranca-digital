@@ -1,5 +1,4 @@
-FROM php:7.4.20-fpm
-#FROM php:7.4.20-fpm-alpine3.14
+FROM php:8.1.0-fpm
 
 # Set Environment Variables
 ENV DEBIAN_FRONTEND noninteractive
@@ -22,7 +21,7 @@ RUN apt-get install -y --no-install-recommends \
 	zlib1g-dev libicu-dev g++ \
 	libldap2-dev libbz2-dev \
 	curl libcurl4-openssl-dev \
-	libenchant-dev libgmp-dev firebird-dev libib-util \
+	libgmp-dev firebird-dev libib-util \
 	re2c libpng++-dev \
 	libwebp-dev libjpeg-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libvpx-dev libfreetype6-dev \
 	libmagick++-dev \

@@ -110,7 +110,6 @@ $app->configure('swagger-lume');
  //$app->register(App\Providers\EventServiceProvider::class);
 
  $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
- $app->register(Urameshibr\Providers\FormRequestServiceProvider::class);
  $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
  $app->register(Zizaco\Entrust\EntrustServiceProvider::class);
  $app->register(Spatie\QueryBuilder\QueryBuilderServiceProvider::class);

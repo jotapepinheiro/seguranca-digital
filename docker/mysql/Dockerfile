@@ -1,5 +1,5 @@
 ARG MYSQL_VERSION
-FROM mysql:${MYSQL_VERSION}
+FROM mysql/mysql-server:${MYSQL_VERSION}
 
 #####################################
 # Set Timezone
