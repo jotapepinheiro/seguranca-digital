@@ -7,7 +7,7 @@ use Zizaco\Entrust\EntrustPermission;
 
 class Permission extends EntrustPermission
 {
-    protected $hidden = array('pivot');
+    protected $hidden = ['pivot'];
 
     protected $fillable = [
         'name', 'display_name', 'description'

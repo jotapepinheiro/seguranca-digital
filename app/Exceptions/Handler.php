@@ -59,7 +59,7 @@ class Handler extends ExceptionHandler
         if(!$this->isApiCall($request) || env('APP_DEBUG')) {
             $retval = parent::render($request, $e);
         } else {
-            $retval = $this->getJsonResponseForException($request, $e);
+            $retval = $this->getJsonResponseForException($e);
         }
 
         return $retval;

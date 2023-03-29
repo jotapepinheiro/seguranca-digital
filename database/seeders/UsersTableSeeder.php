@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\User;
 use Carbon\Carbon;
 use Faker\Factory as Faker;

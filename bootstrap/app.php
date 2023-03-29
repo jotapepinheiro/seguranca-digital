@@ -115,6 +115,7 @@ $app->configure('swagger-lume');
  $app->register(Spatie\QueryBuilder\QueryBuilderServiceProvider::class);
  $app->register(SwaggerLume\ServiceProvider::class);
  $app->register(Illuminate\Redis\RedisServiceProvider::class);
+ $app->register(Urameshibr\Providers\LumenFormRequestServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

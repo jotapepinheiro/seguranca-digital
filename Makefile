@@ -52,7 +52,7 @@ dump-autoload: ## Limpar Lumen
 	&& composer dump-autoload \
 	&& php artisan clear-compiled \
 	&& php artisan cache:clear \
-	&& chmod -R 777 storage bootstrap/cache"
+	&& chmod -R 777 storage/*"
 
 composer-validate: ## Validar dependencias do composer
 	composer validate
