@@ -27,7 +27,7 @@ class RolesTableSeeder extends Seeder
             'name' => 'admin',
             'display_name' => 'Administrador',
             'description' => 'Administrador do Sistema'
-        ))->perms()->sync([1,5,9,13,14,15,16]);
+        ))->perms()->sync([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
 
         Role::create(array(
             'name' => 'tecnico',

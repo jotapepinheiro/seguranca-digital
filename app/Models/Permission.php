@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Zizaco\Entrust\EntrustPermission;
 
 class Permission extends EntrustPermission
 {
+    use HasFactory;
+
     protected $hidden = ['pivot'];
 
     protected $fillable = [

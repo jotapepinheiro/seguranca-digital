@@ -60,6 +60,9 @@ composer-validate: ## Validar dependencias do composer
 composer-show: ## Exibir pacotes do composer
 	composer show -l --direct --outdated
 
+test: ## Teste PhpUnit
+	 php vendor/bin/phpunit
+
 phpstan: ## Analisar código PHP usando PHPSTAN (https://phpstan.org/)
 	php -d memory_limit=-1 ./vendor/bin/phpstan analyse --level=0 app public
 

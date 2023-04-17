@@ -1,7 +1,8 @@
 <?php
 
-use Laravel\Lumen\Testing\DatabaseMigrations;
-use Laravel\Lumen\Testing\DatabaseTransactions;
+namespace Tests\Feature;
+
+use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
@@ -10,7 +11,7 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testExample(): void
     {
         $this->get('/');
 
