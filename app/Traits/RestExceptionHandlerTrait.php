@@ -13,21 +13,15 @@ trait RestExceptionHandlerTrait
     /**
      * Creates a new JSON response based on exception type.
      *
-     * @param Request $request
      * @param Exception $e
      * @return JsonResponse
      */
-    protected function getJsonResponseForException(Request $request, Exception $e): JsonResponse
+    protected function getJsonResponseForException(Exception $e): JsonResponse
     {
-        switch(true) {
-            case $this->isModelNotFoundException($e):
-                $retval = $this->modelNotFound();
-                break;
-            default:
-                $retval = $this->badRequest();
-        }
-
-        return $retval;
+        return match (true) {
+            $this->isModelNotFoundException($e) => $this->modelNotFound(),
+            default => $this->badRequest(),
+        };
     }
 
     /**

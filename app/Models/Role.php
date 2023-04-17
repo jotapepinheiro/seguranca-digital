@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Zizaco\Entrust\EntrustRole;
 
 class Role extends EntrustRole
 {
+    use HasFactory;
+
     protected $hidden = array('pivot');
 
     protected $fillable = [

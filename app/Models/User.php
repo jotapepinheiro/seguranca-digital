@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\JWT;
 use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -14,7 +15,7 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
-    use Authenticatable, JWT;
+    use HasFactory, Authenticatable, JWT;
     use EntrustUserTrait {
         can as entrustCan;
     }

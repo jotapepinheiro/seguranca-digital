@@ -56,7 +56,7 @@ class AuthLoginRequest extends FormRequest
                 "success" => false,
                 "code" => 422,
                 "error" => $validator->errors(),
-                "message" => "Um ou mais campos são requiridos."
+                "message" => "Um ou mais campos são requeridos."
             ], 422));
     }
 

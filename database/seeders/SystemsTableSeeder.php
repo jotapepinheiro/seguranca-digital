@@ -1,9 +1,11 @@
 <?php
 
-use App\Models\Controle;
+namespace Database\Seeders;
+
+use App\Models\System;
 use Illuminate\Database\Seeder;
 
-class ControlesTableSeeder extends Seeder
+class SystemsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +14,6 @@ class ControlesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Controle::class, 50)->create();
+        System::factory()->count(20)->create();
     }
 }

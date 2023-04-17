@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use OpenApi\Annotations\Get;
 use OpenApi\Annotations\Post;
 use OpenApi\Annotations\Schema;
@@ -78,7 +79,7 @@ class AuthController extends Controller
      */
     public function login(AuthLoginRequest $request): JsonResponse
     {
-        $input = $request->only('email', 'password');
+        $input = $request->only(['email', 'password']);
 
         if($request->input('remember')) {
             $token_ttl = config('app.jwt_ttl_remember_me');
@@ -122,9 +123,14 @@ class AuthController extends Controller
      */
     public function me(): JsonResponse
     {
-        $user = Auth::user()->load('roles.permissions');
+        $user = Auth::user();
 
-        return response()->json(['success' => true, 'code' => 200, 'data' => $user], 200);
+        $user->load(['roles.permissions' => function ($query) {
+            /** @var Builder $query */
+            $query->select('id', 'name', 'display_name', 'description');
+        }]);
+
+        return response()->json(['success' => true, 'code' => 200, 'data' => $user]);
     }
 
     /**
@@ -165,7 +171,7 @@ class AuthController extends Controller
             'nao_antes_de' => Carbon::createFromTimestamp($payload('nbf'))->format('d-m-Y H:i:s')
         ];
 
-        return response()->json(['success' => true, 'code' => 200, 'data' => ['payload' => $payload, 'datas' => $dates]] , 200);
+        return response()->json(['success' => true, 'code' => 200, 'data' => ['payload' => $payload, 'datas' => $dates]]);
     }
 
     /**
@@ -196,7 +202,7 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        return response()->json(['success' => true, 'code' => 200, 'message' => 'Deslogado com Sucesso!!'], 200);
+        return response()->json(['success' => true, 'code' => 200, 'message' => 'Deslogado com Sucesso!!']);
     }
 
     /**

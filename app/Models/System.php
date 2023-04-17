@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Traits\CreatedUpdatedBy;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class System extends Model
 {
-    use CreatedUpdatedBy;
+    use CreatedUpdatedBy, HasFactory;
 
     protected $table = 'systems';
 
