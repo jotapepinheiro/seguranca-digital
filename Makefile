@@ -69,6 +69,9 @@ phpstan: ## Analisar código PHP usando PHPSTAN (https://phpstan.org/)
 phpmd: ## Analisar código PHP usando PHPMD (https://phpmd.org/)
 	./vendor/bin/phpmd src text cleancode,codesize,controversial,design,naming,unusedcode
 
+phpmd-docker: ## Analisar código PHP usando PHPMD (https://phpmd.org/) com Docker
+	docker run -it --rm -v $(pwd):/app -w /app jakzal/phpqa phpmd app text cleancode,codesize,controversial,design,naming,unusedcode
+
 phpcs: ## Executa PhpCs
 	./vendor/bin/phpcs
 

@@ -4,7 +4,6 @@ namespace App\Traits;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 trait RestExceptionHandlerTrait
@@ -13,13 +12,13 @@ trait RestExceptionHandlerTrait
     /**
      * Creates a new JSON response based on exception type.
      *
-     * @param Exception $e
+     * @param Exception $error
      * @return JsonResponse
      */
-    protected function getJsonResponseForException(Exception $e): JsonResponse
+    protected function getJsonResponseForException(Exception $error): JsonResponse
     {
         return match (true) {
-            $this->isModelNotFoundException($e) => $this->modelNotFound(),
+            $this->isModelNotFoundException($error) => $this->modelNotFound(),
             default => $this->badRequest(),
         };
     }
@@ -65,12 +64,12 @@ trait RestExceptionHandlerTrait
     /**
      * Determines if the given exception is an Eloquent model not found.
      *
-     * @param Exception $e
+     * @param Exception $error
      * @return bool
      */
-    protected function isModelNotFoundException(Exception $e): bool
+    protected function isModelNotFoundException(Exception $error): bool
     {
-        return $e instanceof ModelNotFoundException;
+        return $error instanceof ModelNotFoundException;
     }
 
 }

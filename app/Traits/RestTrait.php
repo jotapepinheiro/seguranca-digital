@@ -15,9 +15,9 @@ trait RestTrait
      * @param Request $request
      * @return bool
      */
-    protected function isApiCall(Request $request)
+    protected function isApiCall(Request $request): bool
     {
-        return strpos($request->getUri(), '/api/v') !== false;
+        return str_contains($request->getUri(), '/api/v');
     }
 
 }

@@ -14,23 +14,18 @@ class CorsMiddleware
      * @param Closure $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
-        //Intercepts OPTIONS requests
         if ($request->isMethod('OPTIONS')) {
-            $response = response('', 200);
-        } else {
-            // Pass the request to the next middleware
-            $response = $next($request);
+            return response('', 200);
         }
 
-        // Adds headers to the response
+        $response = $next($request);
         $response->header('Access-Control-Allow-Methods', 'HEAD, GET, POST, PUT, PATCH, DELETE');
         $response->header('Access-Control-Allow-Headers', $request->header('Access-Control-Request-Headers'));
         $response->header('Access-Control-Allow-Origin', '*');
         $response->header('Access-Control-Expose-Headers', 'Location');
 
-        // Sends it
         return $response;
     }
 }

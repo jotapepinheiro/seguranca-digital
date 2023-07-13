@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserPayload;
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use OpenApi\Annotations\Get;
 use OpenApi\Annotations\Post;
 use OpenApi\Annotations\Schema;
@@ -82,11 +84,13 @@ class AuthController extends Controller
         $input = $request->only(['email', 'password']);
 
         if($request->input('remember')) {
-            $token_ttl = config('app.jwt_ttl_remember_me');
-            Auth::factory()->setTTL($token_ttl * 10080);
+            $tokenTtl = config('app.jwt_ttl_remember_me');
+            Auth::factory()->setTTL($tokenTtl * 10080);
         }
 
-        if (! $token = Auth::attempt($input)) {
+        $token = Auth::attempt($input);
+
+        if (!$token) {
             return response()->json(['success' => false, 'code' => 401, 'message' => 'Usuário não autorizado.'], 401);
         }
 
@@ -135,7 +139,7 @@ class AuthController extends Controller
 
     /**
      * @Get(
-     *     path="/auth/payoad",
+     *     path="/auth/payload",
      *     tags={"Auth"},
      *     summary="Retorna dados de payload JWT.",
      *     security={{ "apiAuth": {} }},
@@ -161,7 +165,7 @@ class AuthController extends Controller
      *
      * @return JsonResponse
      */
-    public function payoad(): JsonResponse
+    public function payload()
     {
         $payload = Auth::payload();
 

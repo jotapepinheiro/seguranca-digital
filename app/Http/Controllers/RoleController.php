@@ -24,8 +24,8 @@ use App\Http\Requests\RoleUpdateRequest;
 class RoleController extends Controller
 {
 
-    private $role;
-    private $permission;
+    private Role $role;
+    private Permission $permission;
 
     /**
      * Create a new controller instance.
@@ -72,7 +72,7 @@ class RoleController extends Controller
     {
         $role = $this->role->orderBy('id','DESC')->paginate(5);
 
-        return response()->json(['success' => true, 'code' => 200, 'data' => $role], 200);
+        return response()->json(['success' => true, 'code' => 200, 'data' => $role]);
     }
 
     /**
@@ -101,7 +101,7 @@ class RoleController extends Controller
             ->pluck('permission_id')
             ->toArray();
 
-        return response()->json(['success' => true, 'code' => 200, 'data' => [$role, $permissions]], 200);
+        return response()->json(['success' => true, 'code' => 200, 'data' => [$role, $permissions]]);
     }
 
     /**
@@ -155,11 +155,11 @@ class RoleController extends Controller
         $role->description = $request->input('description');
         $role->save();
 
-        foreach ($request->input('permissions') as $key => $value) {
+        foreach ($request->input('permissions') as $value) {
             $role->attachPermission($value);
         }
 
-        return response()->json(['success' => true, 'code' => 200, 'data' => ['message' => 'Operação realizada com sucesso.']], 200);
+        return response()->json(['success' => true, 'code' => 200, 'data' => ['message' => 'Operação realizada com sucesso.']]);
     }
 
     /**
@@ -202,7 +202,7 @@ class RoleController extends Controller
     {
         $role = $this->role->with('permissions')->findOrFail($id);
 
-        return response()->json(['success' => true, 'code' => 200, 'data' => $role], 200);
+        return response()->json(['success' => true, 'code' => 200, 'data' => $role]);
     }
 
     /**
@@ -267,11 +267,11 @@ class RoleController extends Controller
         DB::table("permission_role")->where("role_id",$id)->delete();
 
         //attach the new permissions to the role
-        foreach ($request->input('permissions') as $key => $value) {
+        foreach ($request->input('permissions') as $value) {
             $role->attachPermission($value);
         }
 
-        return response()->json(['success' => true, 'code' => 200, 'data' => ['message' => 'Operação realizada com sucesso.']], 200);
+        return response()->json(['success' => true, 'code' => 200, 'data' => ['message' => 'Operação realizada com sucesso.']]);
 
     }
 
@@ -313,7 +313,7 @@ class RoleController extends Controller
 
         $role->delete();
 
-        return response()->json(['success' => true, 'code' => 200, 'data' => ['message' => 'Operação realizada com sucesso.']], 200);
+        return response()->json(['success' => true, 'code' => 200, 'data' => ['message' => 'Operação realizada com sucesso.']]);
 
     }
 

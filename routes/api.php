@@ -1,9 +1,8 @@
 <?php
 
-/** @var Router $router */
-
 use Laravel\Lumen\Routing\Router;
 
+/** @var Router $router */
 $router->get('/', 'AppController@index');
 
 $router->group(['prefix' => 'api/v1'], function() use ($router) {
@@ -14,7 +13,7 @@ $router->group(['prefix' => 'api/v1'], function() use ($router) {
         $router->post('logout', 'AuthController@logout');
         $router->post('refresh', 'AuthController@refresh');
         $router->get('me', 'AuthController@me');
-        $router->get('payoad', 'AuthController@payoad');
+        $router->get('payload', 'AuthController@payload');
 
         // REGISTER
         $router->post('register', 'UserController@register');

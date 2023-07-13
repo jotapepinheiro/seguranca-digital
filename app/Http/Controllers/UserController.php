@@ -111,8 +111,9 @@ class UserController extends Controller
             $input = $request->only('name', 'email', 'password');
             $input['password'] = app('hash')->make($input['password']);
 
-            if( $user = $this->user->create($input) ) {
+            $user = $this->user->create($input);
 
+            if( $user ) {
                 $user->attachRole(3);
 
                 $code = 200;
@@ -132,7 +133,6 @@ class UserController extends Controller
             }
 
         } catch (\Exception $e) {
-            //dd($e->getMessage());
             $code = 500;
             $output = [
                 'success' => false,

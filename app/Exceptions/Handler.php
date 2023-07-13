@@ -41,7 +41,7 @@ class Handler extends ExceptionHandler
      * @return void
      * @throws Exception
      */
-    public function report(Exception|Throwable $e)
+    public function report(Exception|Throwable $e): void
     {
         parent::report($e);
     }
@@ -54,14 +54,12 @@ class Handler extends ExceptionHandler
      * @return Response|JsonResponse
      * @throws Throwable
      */
-    public function render($request, Exception|Throwable $e)
+    public function render($request, Exception|Throwable $e): Response|JsonResponse
     {
         if(!$this->isApiCall($request) || env('APP_DEBUG')) {
-            $retval = parent::render($request, $e);
-        } else {
-            $retval = $this->getJsonResponseForException($e);
+            return parent::render($request, $e);
         }
 
-        return $retval;
+        return $this->getJsonResponseForException($e);
     }
 }
